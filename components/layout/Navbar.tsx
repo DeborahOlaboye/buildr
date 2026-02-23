@@ -77,7 +77,7 @@ export default function Navbar() {
           )}
           <Button size="sm" className="gap-1.5">
             <Zap className="h-3.5 w-3.5" />
-            Join Talent+
+            Join Stacks+
           </Button>
         </div>
 
@@ -118,7 +118,7 @@ export default function Navbar() {
               </div>
               <Button className="w-full mt-3 gap-1.5">
                 <Zap className="h-3.5 w-3.5" />
-                Join Talent+
+                Join Stacks+
               </Button>
             </div>
           </nav>

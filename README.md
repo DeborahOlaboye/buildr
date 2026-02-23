@@ -1,6 +1,6 @@
 # Buildr
 
-**Buildr** is a comprehensive builder rewards and ecosystem discovery platform for the [Stacks](https://www.stacks.co/) Bitcoin Layer 2 network. It tracks onchain activity and GitHub contributions from developers, ranks them on a live leaderboard, and distributes monthly $STX rewards to the most impactful builders in the ecosystem.
+**Buildr** is a comprehensive builder rewards and ecosystem discovery platform built natively on [Stacks](https://www.stacks.co/) — the Bitcoin Layer 2 for smart contracts. It tracks onchain activity and GitHub contributions from Stacks developers, ranks them on a live leaderboard, and distributes monthly $STX rewards to the most impactful builders in the Bitcoin L2 ecosystem.
 
 ---
 
@@ -15,7 +15,7 @@ Buildr connects builders, projects, and ecosystems in one place. Whether you're 
 | **Rewards** | Monthly $STX reward programs tracking onchain and GitHub activity |
 | **Builders** | Live leaderboard of ranked Stacks builders with estimated rewards |
 | **Ecosystems** | Discover and explore projects and ecosystems building on Stacks |
-| **Pricing** | Talent+ subscription tiers and feature unlocks |
+| **Pricing** | Stacks+ subscription tiers and STX-gated feature unlocks |
 
 ---
 
@@ -27,7 +27,7 @@ Buildr connects builders, projects, and ecosystems in one place. Whether you're 
 - **Monthly Reward Programs** — Participate in time-boxed programs (e.g., Feb 1–28) with a shared $STX prize pool distributed across top 50 winners
 - **Activity Dashboard** — View your personal tracked activity, connection status, and estimated rewards at a glance
 - **Ecosystem Explorer** — Browse builders, projects, and ecosystems across the Stacks network
-- **Talent+ Membership** — Premium tier that unlocks advanced features, analytics, and exclusive rewards
+- **Stacks+ Membership** — STX-gated premium tier that unlocks advanced analytics, exclusive reward programs, and priority features
 - **Search** — Search builders, projects, and ecosystems from anywhere in the app
 - **FAQ & Guides** — In-app documentation covering eligibility, reward calculation, distribution, and support
 - **Dark / Light Theme** — Full theme toggle support
@@ -59,7 +59,7 @@ buildr/
 │   ├── ecosystems/
 │   │   └── page.tsx        # Ecosystem explorer
 │   └── pricing/
-│       └── page.tsx        # Talent+ pricing tiers
+│       └── page.tsx        # Stacks+ pricing tiers
 ├── components/
 │   ├── layout/
 │   │   ├── Navbar.tsx
