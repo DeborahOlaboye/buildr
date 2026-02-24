@@ -1,4 +1,4 @@
-import type { Builder, RewardProgram, UserActivity, FAQItem, Ecosystem, EcosystemStats } from "@/types";
+import type { Builder, RewardProgram, UserActivity, FAQItem, Ecosystem, EcosystemStats, PricingTier, PricingFeature, PricingFAQItem } from "@/types";
 
 export const MOCK_BUILDERS: Builder[] = [
   {
@@ -1504,3 +1504,137 @@ export const ECOSYSTEM_STATS: EcosystemStats = {
   totalBuilders: 549,
   totalTVL: 164000000,
 };
+
+// ─── Pricing tiers ────────────────────────────────────────────────────────────
+
+export const PRICING_TIERS: PricingTier[] = [
+  {
+    id: "free",
+    name: "Free",
+    tagline: "Get started building on Stacks",
+    monthlyPrice: 0,
+    annualPrice: 0,
+    currency: "USD",
+    isRecommended: false,
+    ctaLabel: "Get Started",
+    features: [
+      "Leaderboard access",
+      "Connect 1 Stacks wallet",
+      "Connect GitHub profile",
+      "Monthly reward eligibility",
+      "Basic activity tracking",
+      "Public builder profile",
+      "FAQ & community support",
+    ],
+  },
+  {
+    id: "pro",
+    name: "Stacks+",
+    tagline: "For serious Stacks builders",
+    monthlyPrice: 9,
+    annualPrice: 7,
+    currency: "USD",
+    isRecommended: true,
+    ctaLabel: "Join Stacks+",
+    features: [
+      "Everything in Free",
+      "Connect up to 5 wallets",
+      "Advanced activity analytics",
+      "Priority leaderboard ranking",
+      "Exclusive Stacks+ reward programs",
+      "Early access to new ecosystems",
+      "Builder badge & verified checkmark",
+      "Email notifications for reward drops",
+      "API access (100 req/min)",
+      "Priority support",
+    ],
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    tagline: "For protocols and ecosystems",
+    monthlyPrice: null,
+    annualPrice: null,
+    currency: "USD",
+    isRecommended: false,
+    ctaLabel: "Contact Us",
+    features: [
+      "Everything in Stacks+",
+      "Unlimited wallet connections",
+      "Custom reward programs",
+      "Ecosystem spotlight placement",
+      "Dedicated account manager",
+      "Custom analytics dashboard",
+      "Bulk builder onboarding",
+      "SLA & uptime guarantee",
+      "Unlimited API access",
+      "White-label options",
+    ],
+  },
+];
+
+// ─── Feature comparison table ─────────────────────────────────────────────────
+
+export const PRICING_FEATURES: PricingFeature[] = [
+  { label: "Leaderboard access",          free: true,      pro: true,       enterprise: true },
+  { label: "Wallet connections",          free: "1",       pro: "Up to 5",  enterprise: "Unlimited" },
+  { label: "Monthly reward eligibility",  free: true,      pro: true,       enterprise: true },
+  { label: "Exclusive reward programs",   free: false,     pro: true,       enterprise: true },
+  { label: "Activity analytics",          free: "Basic",   pro: "Advanced", enterprise: "Custom" },
+  { label: "Builder badge",               free: false,     pro: true,       enterprise: true },
+  { label: "Early ecosystem access",      free: false,     pro: true,       enterprise: true },
+  { label: "Email notifications",         free: false,     pro: true,       enterprise: true },
+  { label: "API access",                  free: false,     pro: "100/min",  enterprise: "Unlimited" },
+  { label: "Custom reward programs",      free: false,     pro: false,      enterprise: true },
+  { label: "Ecosystem spotlight",         free: false,     pro: false,      enterprise: true },
+  { label: "Dedicated account manager",   free: false,     pro: false,      enterprise: true },
+  { label: "White-label options",         free: false,     pro: false,      enterprise: true },
+  { label: "Support",                     free: "Community", pro: "Priority", enterprise: "Dedicated SLA" },
+];
+
+// ─── Pricing FAQ ──────────────────────────────────────────────────────────────
+
+export const PRICING_FAQ: PricingFAQItem[] = [
+  {
+    id: "billing-cycle",
+    question: "How does annual billing work?",
+    answer:
+      "When you choose annual billing, you are charged once per year at the discounted rate (equivalent to 2 months free). Your subscription renews automatically every 12 months unless cancelled.",
+  },
+  {
+    id: "stx-payment",
+    question: "Can I pay with $STX instead of USD?",
+    answer:
+      "Yes! Stacks+ Pro and Enterprise plans can be paid in $STX. The STX equivalent is calculated at the time of payment using the live Coingecko price. Paying in $STX also earns you a 5% bonus on your monthly reward estimate.",
+  },
+  {
+    id: "upgrade-downgrade",
+    question: "Can I upgrade or downgrade my plan at any time?",
+    answer:
+      "Absolutely. You can upgrade from Free to Stacks+ at any time and access Pro features immediately. If you downgrade, you keep Pro features until the end of your current billing period.",
+  },
+  {
+    id: "cancel",
+    question: "What happens if I cancel Stacks+?",
+    answer:
+      "You can cancel at any time. Your Pro features remain active until the end of your paid period. After that, your account reverts to the Free tier. Your builder history and rewards are never deleted.",
+  },
+  {
+    id: "refund",
+    question: "Do you offer refunds?",
+    answer:
+      "We offer a 7-day money-back guarantee for new Stacks+ subscriptions. If you are not satisfied, contact support within 7 days of your first charge for a full refund.",
+  },
+  {
+    id: "enterprise-custom",
+    question: "What's included in the Enterprise plan?",
+    answer:
+      "Enterprise is designed for protocols, ecosystems, and companies that want to run their own branded reward programs, access bulk analytics, and get dedicated onboarding support. Pricing is custom based on your needs — contact us to get a quote.",
+  },
+  {
+    id: "stx-requirement",
+    question: "Do I need to hold $STX to use Stacks+?",
+    answer:
+      "No minimum STX balance is required to subscribe to Stacks+. You just need a connected Stacks wallet. However, holding and stacking STX improves your onchain activity score and increases your reward estimates.",
+  },
+];
