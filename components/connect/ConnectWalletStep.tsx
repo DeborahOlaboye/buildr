@@ -29,7 +29,7 @@ export default function ConnectWalletStep({ onConnected }: ConnectWalletStepProp
 
   return (
     <div className="rounded-2xl border bg-card p-6 sm:p-8 space-y-5">
-      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 mx-auto">
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 mx-auto" aria-hidden="true">
         <Wallet className="h-6 w-6 text-primary" />
       </div>
       <div className="text-center space-y-1">
@@ -46,21 +46,28 @@ export default function ConnectWalletStep({ onConnected }: ConnectWalletStepProp
           onChange={(e) => setAddress(e.target.value)}
           className="font-mono text-xs"
           aria-label="Stacks wallet address"
+          aria-describedby={error ? "wallet-error" : undefined}
+          aria-invalid={!!error}
         />
-        {error && <p className="text-xs text-destructive">{error}</p>}
+        {error && (
+          <p id="wallet-error" role="alert" className="text-xs text-destructive">
+            {error}
+          </p>
+        )}
         <Button
           className="w-full gap-2"
           onClick={handleConnect}
           disabled={loading || !address.trim()}
+          aria-busy={loading}
         >
           {loading ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Connecting…
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+              <span>Connecting…</span>
             </>
           ) : (
             <>
-              <Check className="h-4 w-4" />
+              <Check className="h-4 w-4" aria-hidden="true" />
               Connect Wallet
             </>
           )}

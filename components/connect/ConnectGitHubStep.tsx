@@ -28,7 +28,7 @@ export default function ConnectGitHubStep({ onConnected }: ConnectGitHubStepProp
 
   return (
     <div className="rounded-2xl border bg-card p-6 sm:p-8 space-y-5">
-      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 mx-auto">
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 mx-auto" aria-hidden="true">
         <Github className="h-6 w-6 text-primary" />
       </div>
       <div className="text-center space-y-1">
@@ -47,22 +47,29 @@ export default function ConnectGitHubStep({ onConnected }: ConnectGitHubStepProp
             value={handle}
             onChange={(e) => setHandle(e.target.value)}
             aria-label="GitHub username"
+            aria-describedby={error ? "github-error" : undefined}
+            aria-invalid={!!error}
           />
         </div>
-        {error && <p className="text-xs text-destructive">{error}</p>}
+        {error && (
+          <p id="github-error" role="alert" className="text-xs text-destructive">
+            {error}
+          </p>
+        )}
         <Button
           className="w-full gap-2"
           onClick={handleConnect}
           disabled={loading || !handle.trim()}
+          aria-busy={loading}
         >
           {loading ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Connecting…
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+              <span>Connecting…</span>
             </>
           ) : (
             <>
-              <Check className="h-4 w-4" />
+              <Check className="h-4 w-4" aria-hidden="true" />
               Connect GitHub
             </>
           )}
