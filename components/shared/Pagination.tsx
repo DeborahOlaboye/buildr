@@ -49,7 +49,7 @@ export default function Pagination({
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4 px-2">
+    <nav aria-label="Pagination" className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4 px-2">
       {/* Left: rows info */}
       <p className="text-sm text-muted-foreground order-2 sm:order-1">
         Showing{" "}
@@ -131,6 +131,6 @@ export default function Pagination({
           </SelectContent>
         </Select>
       </div>
-    </div>
+    </nav>
   );
 }
