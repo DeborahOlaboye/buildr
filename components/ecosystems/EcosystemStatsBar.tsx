@@ -48,3 +48,5 @@ export default function EcosystemStatsBar({ stats }: EcosystemStatsBarProps) {
     </div>
   );
 }
+
+// Note: TVL figures are mocked and for display purposes only.
