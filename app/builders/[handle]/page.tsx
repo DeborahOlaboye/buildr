@@ -3,17 +3,24 @@ import { Separator } from "@/components/ui/separator";
 import BuilderProfileHero from "@/components/builders/BuilderProfileHero";
 import BuilderStatGrid from "@/components/builders/BuilderStatGrid";
 import BuilderNotFound from "@/components/builders/BuilderNotFound";
-import { MOCK_BUILDERS } from "@/lib/mock-data";
 
 interface BuilderProfilePageProps {
   params: Promise<{ handle: string }>;
 }
 
+async function getBuilder(handle: string) {
+  const base = process.env.NEXT_PUBLIC_BASE_URL ?? `http://localhost:${process.env.PORT ?? 3000}`;
+  const res = await fetch(`${base}/api/builders/${encodeURIComponent(handle)}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) return null;
+  const data = await res.json();
+  return data.builder ?? null;
+}
+
 export default async function BuilderProfilePage({ params }: BuilderProfilePageProps) {
   const { handle } = await params;
-  const builder = MOCK_BUILDERS.find(
-    (b) => b.handle.toLowerCase() === handle.toLowerCase()
-  );
+  const builder = await getBuilder(handle);
 
   if (!builder) {
     return <BuilderNotFound handle={handle} />;

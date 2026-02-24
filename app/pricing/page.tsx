@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PricingHeader from "@/components/pricing/PricingHeader";
 import BillingToggle from "@/components/pricing/BillingToggle";
 import PricingGrid from "@/components/pricing/PricingGrid";
@@ -9,15 +9,24 @@ import PricingFAQ from "@/components/pricing/PricingFAQ";
 import EnterpriseCallout from "@/components/pricing/EnterpriseCallout";
 import TrustBar from "@/components/pricing/TrustBar";
 import { Separator } from "@/components/ui/separator";
-import {
-  PRICING_TIERS,
-  PRICING_FEATURES,
-  PRICING_FAQ,
-} from "@/lib/mock-data";
-import type { BillingCycle } from "@/types";
+import { fetchPricing } from "@/lib/api-client";
+import type { BillingCycle, PricingApiResponse } from "@/types";
 
 export default function PricingPage() {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
+  const [data, setData] = useState<PricingApiResponse | null>(null);
+
+  useEffect(() => {
+    fetchPricing().then(setData).catch(console.error);
+  }, []);
+
+  if (!data) {
+    return (
+      <div className="pricing-page-root min-h-screen flex items-center justify-center">
+        <p className="text-muted-foreground">Loading pricing…</p>
+      </div>
+    );
+  }
 
   return (
     <div className="pricing-page-root min-h-screen">
@@ -32,12 +41,12 @@ export default function PricingPage() {
         </div>
 
         {/* Tier cards */}
-        <PricingGrid tiers={PRICING_TIERS} billing={billing} />
+        <PricingGrid tiers={data.tiers} billing={billing} />
 
         <Separator />
 
         {/* Full feature comparison */}
-        <FeatureComparisonTable features={PRICING_FEATURES} />
+        <FeatureComparisonTable features={data.features} />
 
         <Separator />
 
@@ -45,7 +54,7 @@ export default function PricingPage() {
         <EnterpriseCallout />
 
         {/* FAQ */}
-        <PricingFAQ items={PRICING_FAQ} />
+        <PricingFAQ items={data.faq} />
       </div>
     </div>
   );
