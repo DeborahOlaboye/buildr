@@ -29,6 +29,7 @@ export default function TopBuilderCard({
   return (
     <button
       onClick={() => onClick(builder)}
+      aria-label={`View profile for ${builder.name}, rank #${builder.rank}, ${formatSTX(reward)} STX ${sortMode === "monthly" ? "monthly" : "all-time"} reward`}
       className={cn(
         "flex flex-col items-center gap-3 rounded-xl border p-5 text-center transition-all hover:shadow-md hover:-translate-y-0.5 w-full",
         builder.rank === 1 && "border-yellow-300 bg-yellow-50 dark:bg-yellow-950/20"
@@ -55,13 +56,13 @@ export default function TopBuilderCard({
         <div className="flex items-center justify-center gap-1 font-semibold text-sm">
           {builder.name}
           {builder.isVerified && (
-            <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+            <ShieldCheck className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
           )}
         </div>
         <p className="text-xs text-muted-foreground">@{builder.handle}</p>
       </div>
-      <div className="flex items-center gap-1 text-sm font-bold text-primary">
-        <Trophy className="h-3.5 w-3.5" />
+      <div className="flex items-center gap-1 text-sm font-bold text-primary" aria-hidden="true">
+        <Trophy className="h-3.5 w-3.5" aria-hidden="true" />
         {formatSTX(reward)} $STX
       </div>
     </button>
