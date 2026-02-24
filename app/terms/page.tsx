@@ -1,23 +1,13 @@
 import React from "react";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import LegalPageHeader from "@/components/legal/LegalPageHeader";
+import LegalLinksBar from "@/components/legal/LegalLinksBar";
 
 const LAST_UPDATED = "February 1, 2025";
 
 export default function TermsPage() {
   return (
     <div className="container max-w-3xl mx-auto px-4 py-12 space-y-10">
-      <div className="space-y-3">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to home
-        </Link>
-        <h1 className="text-3xl font-bold tracking-tight">Terms &amp; Conditions</h1>
-        <p className="text-sm text-muted-foreground">Last updated: {LAST_UPDATED}</p>
-      </div>
+      <LegalPageHeader title="Terms & Conditions" lastUpdated={LAST_UPDATED} />
 
       <div className="space-y-8 text-muted-foreground leading-relaxed">
         <section className="space-y-3">
@@ -121,10 +111,7 @@ export default function TermsPage() {
         </section>
       </div>
 
-      <div className="border-t pt-6 flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground">
-        <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-        <Link href="/data-policy" className="hover:text-primary transition-colors">Data Policy</Link>
-      </div>
+      <LegalLinksBar current="/terms" />
     </div>
   );
 }
