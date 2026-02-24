@@ -5,16 +5,18 @@ import SearchBar from "@/components/builders/SearchBar";
 import SortToggle from "@/components/builders/SortToggle";
 import BuilderCount from "@/components/builders/BuilderCount";
 import LeaderboardTable from "@/components/builders/LeaderboardTable";
+import TopBuilderCard from "@/components/builders/TopBuilderCard";
 import EmptyState from "@/components/builders/EmptyState";
 import Pagination from "@/components/shared/Pagination";
 import { MOCK_BUILDERS, TOTAL_BUILDERS } from "@/lib/mock-data";
-import type { SortMode, RowsPerPageOption } from "@/types";
+import type { Builder, SortMode, RowsPerPageOption } from "@/types";
 
 export default function BuildersPage() {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortMode>("monthly");
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<RowsPerPageOption>(10);
+  const [selectedBuilder, setSelectedBuilder] = useState<Builder | null>(null);
 
   // Filter builders by search query (name or handle)
   const filtered = useMemo(() => {
@@ -84,6 +86,26 @@ export default function BuildersPage() {
           <SortToggle value={sort} onChange={handleSortChange} />
         </div>
       </div>
+
+      {/* Top 3 Podium — only shown when not searching */}
+      {!search.trim() && (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {MOCK_BUILDERS.slice(0, 3)
+            .sort((a, b) =>
+              sort === "monthly"
+                ? b.monthlyReward - a.monthlyReward
+                : b.allTimeReward - a.allTimeReward
+            )
+            .map((builder) => (
+              <TopBuilderCard
+                key={builder.id}
+                builder={builder}
+                sortMode={sort}
+                onClick={setSelectedBuilder}
+              />
+            ))}
+        </div>
+      )}
 
       {/* Count */}
       <BuilderCount count={totalCount} filtered={!!search.trim()} />
