@@ -3,14 +3,14 @@ import { Separator } from "@/components/ui/separator";
 import BuilderProfileHero from "@/components/builders/BuilderProfileHero";
 import BuilderStatGrid from "@/components/builders/BuilderStatGrid";
 import BuilderNotFound from "@/components/builders/BuilderNotFound";
+import { getInternalUrl } from "@/lib/config";
 
 interface BuilderProfilePageProps {
   params: Promise<{ handle: string }>;
 }
 
 async function getBuilder(handle: string) {
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? `http://localhost:${process.env.PORT ?? 3000}`;
-  const res = await fetch(`${base}/api/builders/${encodeURIComponent(handle)}`, {
+  const res = await fetch(getInternalUrl(`/api/builders/${encodeURIComponent(handle)}`), {
     cache: "no-store",
   });
   if (!res.ok) return null;
