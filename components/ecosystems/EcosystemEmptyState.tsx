@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { SearchX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -42,9 +43,18 @@ export default function EcosystemEmptyState({
           )}
         </p>
       </div>
-      <Button variant="outline" size="sm" onClick={onClear}>
-        Clear filters
-      </Button>
+      <div className="flex items-center gap-2">
+        <Button variant="outline" size="sm" onClick={onClear}>
+          Clear filters
+        </Button>
+        {query.trim() && (
+          <Button variant="ghost" size="sm" asChild>
+            <Link href={`/search?q=${encodeURIComponent(query.trim())}`}>
+              Search everywhere
+            </Link>
+          </Button>
+        )}
+      </div>
     </div>
   );
 }
