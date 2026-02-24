@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { SearchX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -21,9 +22,18 @@ export default function EmptyState({ query, onClear }: EmptyStateProps) {
           Try a different name or handle.
         </p>
       </div>
-      <Button variant="outline" onClick={onClear}>
-        Clear search
-      </Button>
+      <div className="flex items-center gap-2">
+        <Button variant="outline" onClick={onClear}>
+          Clear search
+        </Button>
+        {query && (
+          <Button variant="ghost" asChild>
+            <Link href={`/search?q=${encodeURIComponent(query)}`}>
+              Search everywhere
+            </Link>
+          </Button>
+        )}
+      </div>
     </div>
   );
 }
