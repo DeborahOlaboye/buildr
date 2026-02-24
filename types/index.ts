@@ -170,53 +170,37 @@ export interface ActivityFeedItem {
   timestamp: string; // ISO 8601
 }
 
-// ─── API Response Types ───────────────────────────────────────────────────────
+// ─── Search ───────────────────────────────────────────────────────────────────
 
-export interface ApiError {
-  error: string;
-  status: number;
+export type SearchResultKind = "builder" | "ecosystem";
+
+export interface BuilderSearchResult {
+  kind: "builder";
+  id: string;
+  handle: string;
+  name: string;
+  avatarUrl: string;
+  rank: number;
+  monthlyReward: number;
+  isVerified: boolean;
+  ecosystem: string[];
 }
 
-export interface ApiResponse<T> {
-  data: T;
-  ok: boolean;
+export interface EcosystemSearchResult {
+  kind: "ecosystem";
+  id: string;
+  slug: string;
+  name: string;
+  logoUrl: string;
+  category: string;
+  builderCount: number;
+  isVerified: boolean;
+  isFeatured: boolean;
 }
 
-export interface BuildersApiResponse {
-  builders: Builder[];
+export interface SearchApiResponse {
+  query: string;
+  builders: BuilderSearchResult[];
+  ecosystems: EcosystemSearchResult[];
   total: number;
-  page: number;
-  rowsPerPage: number;
-  topThree: Builder[];
-}
-
-export interface EcosystemsApiResponse {
-  ecosystems: Ecosystem[];
-  total: number;
-  page: number;
-  rowsPerPage: number;
-  featured: Ecosystem[];
-  stats: EcosystemStats;
-  categoryCounts: Record<string, number>;
-}
-
-export interface RewardsApiResponse {
-  program: RewardProgram;
-  topBuilders: Builder[];
-  totalBuilders: number;
-  faqItems: FAQItem[];
-}
-
-export interface ActivityApiResponse {
-  items: ActivityFeedItem[];
-}
-
-export interface PricingApiResponse {
-  tiers: PricingTier[];
-  features: PricingFeature[];
-  faq: PricingFAQItem[];
-}
-
-export interface BuilderApiResponse {
-  builder: Builder;
 }
