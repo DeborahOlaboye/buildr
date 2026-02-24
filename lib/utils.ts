@@ -38,3 +38,18 @@ export function getRankLabel(rank: number): string {
   if (rank === 3) return "🥉";
   return `#${rank}`;
 }
+
+export function formatRelativeTime(isoTimestamp: string): string {
+  const now = Date.now();
+  const then = new Date(isoTimestamp).getTime();
+  const diff = Math.floor((now - then) / 1000); // seconds ago
+
+  if (diff < 60) return "just now";
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+  if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`;
+  return new Date(isoTimestamp).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
