@@ -169,3 +169,54 @@ export interface ActivityFeedItem {
   description: string;
   timestamp: string; // ISO 8601
 }
+
+// ─── API Response Types ───────────────────────────────────────────────────────
+
+export interface ApiError {
+  error: string;
+  status: number;
+}
+
+export interface ApiResponse<T> {
+  data: T;
+  ok: boolean;
+}
+
+export interface BuildersApiResponse {
+  builders: Builder[];
+  total: number;
+  page: number;
+  rowsPerPage: number;
+  topThree: Builder[];
+}
+
+export interface EcosystemsApiResponse {
+  ecosystems: Ecosystem[];
+  total: number;
+  page: number;
+  rowsPerPage: number;
+  featured: Ecosystem[];
+  stats: EcosystemStats;
+  categoryCounts: Record<string, number>;
+}
+
+export interface RewardsApiResponse {
+  program: RewardProgram;
+  topBuilders: Builder[];
+  totalBuilders: number;
+  faqItems: FAQItem[];
+}
+
+export interface ActivityApiResponse {
+  items: ActivityFeedItem[];
+}
+
+export interface PricingApiResponse {
+  tiers: PricingTier[];
+  features: PricingFeature[];
+  faq: PricingFAQItem[];
+}
+
+export interface BuilderApiResponse {
+  builder: Builder;
+}
