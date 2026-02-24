@@ -88,6 +88,33 @@
   }
 }
 
+/* ── Rewards page specific dark/light styles ───────────────────────────────── */
+.dark .rewards-gradient-card {
+  background: linear-gradient(135deg,
+    hsl(24 60% 8%) 0%,
+    hsl(262 40% 8%) 100%);
+}
+
+.rewards-gradient-card {
+  background: linear-gradient(135deg,
+    hsl(24 100% 97%) 0%,
+    hsl(262 83% 97%) 100%);
+}
+
+/* Connection card lift on hover */
+.connection-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.connection-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px hsl(var(--foreground) / 0.06);
+}
+
+/* Progress bar glow */
+.progress-bar-fill {
+  box-shadow: 0 0 8px hsl(var(--primary) / 0.5);
+}
+
 /* Smooth focus rings for keyboard nav */
 :focus-visible {
   outline: 2px solid hsl(var(--ring));
