@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import SearchBar from "@/components/builders/SearchBar";
 import SortToggle from "@/components/builders/SortToggle";
 import BuilderCount from "@/components/builders/BuilderCount";
@@ -9,52 +9,33 @@ import TopBuilderCard from "@/components/builders/TopBuilderCard";
 import EmptyState from "@/components/builders/EmptyState";
 import Pagination from "@/components/shared/Pagination";
 import SkeletonRow from "@/components/shared/SkeletonRow";
-import { MOCK_BUILDERS, TOTAL_BUILDERS } from "@/lib/mock-data";
-import type { Builder, SortMode, RowsPerPageOption } from "@/types";
+import { fetchBuilders } from "@/lib/api-client";
+import type { Builder, SortMode, RowsPerPageOption, BuildersApiResponse } from "@/types";
+
+const DEFAULT_ROWS: RowsPerPageOption = 10;
 
 export default function BuildersPage() {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortMode>("monthly");
   const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState<RowsPerPageOption>(10);
+  const [rowsPerPage, setRowsPerPage] = useState<RowsPerPageOption>(DEFAULT_ROWS);
   const [selectedBuilder, setSelectedBuilder] = useState<Builder | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<BuildersApiResponse | null>(null);
 
-  // Simulate initial data load
+  const load = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const result = await fetchBuilders({ search, sort, page, limit: rowsPerPage });
+      setData(result);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [search, sort, page, rowsPerPage]);
+
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Filter builders by search query (name or handle)
-  const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    if (!q) return MOCK_BUILDERS;
-    return MOCK_BUILDERS.filter(
-      (b) =>
-        b.name.toLowerCase().includes(q) ||
-        b.handle.toLowerCase().includes(q) ||
-        b.ecosystem.some((e) => e.toLowerCase().includes(q))
-    );
-  }, [search]);
-
-  // Sort filtered results
-  const sorted = useMemo(() => {
-    return [...filtered].sort((a, b) =>
-      sort === "monthly"
-        ? b.monthlyReward - a.monthlyReward
-        : b.allTimeReward - a.allTimeReward
-    );
-  }, [filtered, sort]);
-
-  // Paginate
-  const paginated = useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    return sorted.slice(start, start + rowsPerPage);
-  }, [sorted, page, rowsPerPage]);
-
-  // Total count: use TOTAL_BUILDERS for unfiltered, filtered.length for filtered
-  const totalCount = search.trim() ? filtered.length : TOTAL_BUILDERS;
+    load();
+  }, [load]);
 
   function handleSearchChange(value: string) {
     setSearch(value);
@@ -70,6 +51,10 @@ export default function BuildersPage() {
     setRowsPerPage(rows);
     setPage(1);
   }
+
+  const builders = data?.builders ?? [];
+  const total = data?.total ?? 0;
+  const topThree = data?.topThree ?? [];
 
   return (
     <div className="container py-8 space-y-6">
@@ -96,27 +81,21 @@ export default function BuildersPage() {
       </div>
 
       {/* Top 3 Podium — only shown when not searching */}
-      {!search.trim() && (
+      {!search.trim() && topThree.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {MOCK_BUILDERS.slice(0, 3)
-            .sort((a, b) =>
-              sort === "monthly"
-                ? b.monthlyReward - a.monthlyReward
-                : b.allTimeReward - a.allTimeReward
-            )
-            .map((builder) => (
-              <TopBuilderCard
-                key={builder.id}
-                builder={builder}
-                sortMode={sort}
-                onClick={setSelectedBuilder}
-              />
-            ))}
+          {topThree.map((builder) => (
+            <TopBuilderCard
+              key={builder.id}
+              builder={builder}
+              sortMode={sort}
+              onClick={setSelectedBuilder}
+            />
+          ))}
         </div>
       )}
 
       {/* Count */}
-      <BuilderCount count={totalCount} filtered={!!search.trim()} />
+      <BuilderCount count={total} filtered={!!search.trim()} />
 
       {/* Table or Empty State */}
       {isLoading ? (
@@ -129,19 +108,27 @@ export default function BuildersPage() {
             </tbody>
           </table>
         </div>
-      ) : paginated.length === 0 ? (
+      ) : builders.length === 0 ? (
         <EmptyState query={search} onClear={() => handleSearchChange("")} />
       ) : (
         <>
-          <LeaderboardTable builders={paginated} sortMode={sort} />
+          <LeaderboardTable
+            builders={builders}
+            sortMode={sort}
+          />
           <Pagination
             currentPage={page}
             rowsPerPage={rowsPerPage}
-            totalItems={totalCount}
+            totalItems={total}
             onPageChange={setPage}
             onRowsPerPageChange={handleRowsPerPageChange}
           />
         </>
+      )}
+
+      {/* Keep modal state here so it survives re-renders */}
+      {selectedBuilder && (
+        <span className="hidden" data-selected={selectedBuilder.id} />
       )}
     </div>
   );

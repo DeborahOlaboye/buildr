@@ -1,54 +1,34 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import FeaturedSection from "@/components/ecosystems/FeaturedSection";
 import EcosystemStatsBar from "@/components/ecosystems/EcosystemStatsBar";
 import EcosystemSearchBar from "@/components/ecosystems/EcosystemSearchBar";
 import EcosystemCategoryTabs from "@/components/ecosystems/EcosystemCategoryTabs";
 import EcosystemGrid from "@/components/ecosystems/EcosystemGrid";
 import SkeletonCard from "@/components/shared/SkeletonCard";
-import { MOCK_ECOSYSTEMS, ECOSYSTEM_STATS } from "@/lib/mock-data";
-import type { EcosystemCategory } from "@/types";
+import { fetchEcosystems } from "@/lib/api-client";
+import type { EcosystemCategory, EcosystemsApiResponse } from "@/types";
 
 export default function EcosystemsPage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<EcosystemCategory>("All");
   const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<EcosystemsApiResponse | null>(null);
+
+  const load = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const result = await fetchEcosystems({ search, category, limit: 50 });
+      setData(result);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [search, category]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Featured ecosystems (max 3)
-  const featured = useMemo(
-    () => MOCK_ECOSYSTEMS.filter((e) => e.isFeatured).slice(0, 3),
-    []
-  );
-
-  // Per-category counts (for tab badges)
-  const categoryCounts = useMemo(() => {
-    const counts = { All: MOCK_ECOSYSTEMS.length } as Record<EcosystemCategory, number>;
-    const cats: EcosystemCategory[] = ["DeFi", "NFT", "Gaming", "Infrastructure", "Social", "DAO"];
-    for (const cat of cats) {
-      counts[cat] = MOCK_ECOSYSTEMS.filter((e) => e.category === cat).length;
-    }
-    return counts;
-  }, []);
-
-  // Filter by category + search
-  const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    return MOCK_ECOSYSTEMS.filter((e) => {
-      const matchesCategory = category === "All" || e.category === category;
-      const matchesSearch =
-        !q ||
-        e.name.toLowerCase().includes(q) ||
-        e.description.toLowerCase().includes(q) ||
-        e.category.toLowerCase().includes(q);
-      return matchesCategory && matchesSearch;
-    });
-  }, [search, category]);
+    load();
+  }, [load]);
 
   function handleClear() {
     setSearch("");
@@ -57,17 +37,21 @@ export default function EcosystemsPage() {
 
   function handleCategoryChange(cat: EcosystemCategory) {
     setCategory(cat);
-    // Reset search when switching category so results are not doubly filtered
     setSearch("");
   }
 
   function handleSearchChange(value: string) {
     setSearch(value);
-    // Reset to All when user types a new search query
     if (value.trim() && category !== "All") {
       setCategory("All");
     }
   }
+
+  const ecosystems = data?.ecosystems ?? [];
+  const featured = data?.featured ?? [];
+  const stats = data?.stats ?? { totalEcosystems: 0, totalBuilders: 0, totalTVL: 0 };
+  const categoryCounts = data?.categoryCounts ?? {};
+  const total = data?.total ?? 0;
 
   return (
     <div className="container py-8 space-y-8">
@@ -80,10 +64,10 @@ export default function EcosystemsPage() {
       </div>
 
       {/* Stats bar */}
-      <EcosystemStatsBar stats={ECOSYSTEM_STATS} />
+      <EcosystemStatsBar stats={stats} />
 
       {/* Spotlight / Featured */}
-      {!search.trim() && category === "All" && (
+      {!search.trim() && category === "All" && featured.length > 0 && (
         <FeaturedSection ecosystems={featured} />
       )}
 
@@ -92,7 +76,7 @@ export default function EcosystemsPage() {
         <EcosystemCategoryTabs
           value={category}
           onChange={handleCategoryChange}
-          counts={categoryCounts}
+          counts={categoryCounts as Record<EcosystemCategory, number>}
         />
         <div className="sm:ml-auto w-full sm:w-auto">
           <EcosystemSearchBar value={search} onChange={handleSearchChange} />
@@ -102,8 +86,8 @@ export default function EcosystemsPage() {
       {/* Result count */}
       {(search.trim() || category !== "All") && (
         <p className="text-sm text-muted-foreground -mt-2">
-          <span className="font-semibold text-foreground">{filtered.length}</span>{" "}
-          ecosystem{filtered.length !== 1 ? "s" : ""} found
+          <span className="font-semibold text-foreground">{total}</span>{" "}
+          ecosystem{total !== 1 ? "s" : ""} found
         </p>
       )}
 
@@ -116,7 +100,7 @@ export default function EcosystemsPage() {
         </div>
       ) : (
         <EcosystemGrid
-          ecosystems={filtered}
+          ecosystems={ecosystems}
           query={search}
           category={category}
           onClear={handleClear}

@@ -1,16 +1,23 @@
 import type { Metadata } from "next";
-import { MOCK_BUILDERS } from "@/lib/mock-data";
 
 interface BuilderLayoutProps {
   children: React.ReactNode;
   params: Promise<{ handle: string }>;
 }
 
+async function getBuilder(handle: string) {
+  const base = process.env.NEXT_PUBLIC_BASE_URL ?? `http://localhost:${process.env.PORT ?? 3000}`;
+  const res = await fetch(`${base}/api/builders/${encodeURIComponent(handle)}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) return null;
+  const data = await res.json();
+  return data.builder ?? null;
+}
+
 export async function generateMetadata({ params }: BuilderLayoutProps): Promise<Metadata> {
   const { handle } = await params;
-  const builder = MOCK_BUILDERS.find(
-    (b) => b.handle.toLowerCase() === handle.toLowerCase()
-  );
+  const builder = await getBuilder(handle);
 
   if (!builder) {
     return {

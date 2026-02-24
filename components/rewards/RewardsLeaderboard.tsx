@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ExternalLink, ShieldCheck } from "lucide-react";
 import {
@@ -14,8 +14,8 @@ import {
 import BuilderProfileModal from "@/components/builders/BuilderProfileModal";
 import Pagination from "@/components/shared/Pagination";
 import { formatSTX } from "@/lib/utils";
-import { MOCK_BUILDERS, TOTAL_BUILDERS } from "@/lib/mock-data";
-import type { Builder, RowsPerPageOption } from "@/types";
+import { fetchBuilders } from "@/lib/api-client";
+import type { Builder, RowsPerPageOption, BuildersApiResponse } from "@/types";
 
 const ROWS_PER_PAGE: RowsPerPageOption = 10;
 
@@ -49,21 +49,28 @@ export default function RewardsLeaderboard() {
   const [page, setPage] = useState(1);
   const [selectedBuilder, setSelectedBuilder] = useState<Builder | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [data, setData] = useState<BuildersApiResponse | null>(null);
 
-  const start = (page - 1) * ROWS_PER_PAGE;
-  const pageBuilders = MOCK_BUILDERS.slice(start, start + ROWS_PER_PAGE);
+  useEffect(() => {
+    fetchBuilders({ sort: "monthly", page, limit: ROWS_PER_PAGE })
+      .then(setData)
+      .catch(console.error);
+  }, [page]);
 
   function handleRowClick(builder: Builder) {
     setSelectedBuilder(builder);
     setModalOpen(true);
   }
 
+  const builders = data?.builders ?? [];
+  const total = data?.total ?? 0;
+
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">Leaderboard</h2>
         <span className="text-sm text-muted-foreground">
-          {TOTAL_BUILDERS.toLocaleString()} Profiles
+          {total.toLocaleString()} Profiles
         </span>
       </div>
 
@@ -79,7 +86,7 @@ export default function RewardsLeaderboard() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {pageBuilders.map((builder) => (
+            {builders.map((builder) => (
               <TableRow
                 key={builder.id}
                 className="cursor-pointer"
@@ -130,7 +137,7 @@ export default function RewardsLeaderboard() {
       <Pagination
         currentPage={page}
         rowsPerPage={ROWS_PER_PAGE}
-        totalItems={TOTAL_BUILDERS}
+        totalItems={total}
         onPageChange={setPage}
         onRowsPerPageChange={() => {}}
       />
