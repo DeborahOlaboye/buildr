@@ -115,6 +115,30 @@
   box-shadow: 0 0 8px hsl(var(--primary) / 0.5);
 }
 
+/* ── Ecosystem card styles ──────────────────────────────────────────────────── */
+
+/* Card lift animation */
+.ecosystem-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.ecosystem-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px hsl(var(--foreground) / 0.08);
+}
+
+/* Featured card glow */
+.featured-ecosystem-card:hover {
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.3),
+              0 8px 24px hsl(var(--primary) / 0.12);
+}
+
+/* Category tab wrap on mobile */
+@media (max-width: 640px) {
+  [role="tablist"] {
+    flex-wrap: wrap;
+  }
+}
+
 /* Smooth focus rings for keyboard nav */
 :focus-visible {
   outline: 2px solid hsl(var(--ring));
