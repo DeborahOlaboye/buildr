@@ -20,6 +20,9 @@ const NAV_LINKS = [
   { href: "/pricing", label: "Pricing" },
 ];
 
+// Connect CTA shown when the user is not yet connected/authenticated
+const CONNECT_HREF = "/connect";
+
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -89,12 +92,17 @@ export default function Navbar() {
               </Badge>
             </div>
           ) : (
-            <Button size="sm" className="gap-1.5" asChild>
-              <Link href="/pricing">
-                <Zap className="h-3.5 w-3.5" />
-                Join Stacks+
-              </Link>
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button size="sm" variant="ghost" className="text-xs" asChild>
+                <Link href={CONNECT_HREF}>Connect Wallet</Link>
+              </Button>
+              <Button size="sm" className="gap-1.5" asChild>
+                <Link href="/pricing">
+                  <Zap className="h-3.5 w-3.5" />
+                  Join Stacks+
+                </Link>
+              </Button>
+            </div>
           )}
         </div>
 
@@ -139,12 +147,19 @@ export default function Navbar() {
                   <span className="text-sm font-medium text-primary">Stacks+ Member</span>
                 </div>
               ) : (
-                <Button className="w-full mt-3 gap-1.5" asChild>
-                  <Link href="/pricing">
-                    <Zap className="h-3.5 w-3.5" />
-                    Join Stacks+
-                  </Link>
-                </Button>
+                <div className="flex flex-col gap-2 mt-3">
+                  <Button variant="outline" className="w-full gap-1.5" asChild>
+                    <Link href={CONNECT_HREF} onClick={() => setMobileOpen(false)}>
+                      Connect Wallet
+                    </Link>
+                  </Button>
+                  <Button className="w-full gap-1.5" asChild>
+                    <Link href="/pricing" onClick={() => setMobileOpen(false)}>
+                      <Zap className="h-3.5 w-3.5" />
+                      Join Stacks+
+                    </Link>
+                  </Button>
+                </div>
               )}
             </div>
           </nav>
