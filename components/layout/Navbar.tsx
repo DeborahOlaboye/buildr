@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Search, Menu, X, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import ThemeToggle from "@/components/layout/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -75,6 +76,7 @@ export default function Navbar() {
               <Search className="h-4 w-4" />
             </Button>
           )}
+          <ThemeToggle />
           <Button size="sm" className="gap-1.5">
             <Zap className="h-3.5 w-3.5" />
             Join Stacks+
