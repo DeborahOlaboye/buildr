@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import SearchBar from "@/components/builders/SearchBar";
 import SortToggle from "@/components/builders/SortToggle";
 import BuilderCount from "@/components/builders/BuilderCount";
@@ -8,6 +8,7 @@ import LeaderboardTable from "@/components/builders/LeaderboardTable";
 import TopBuilderCard from "@/components/builders/TopBuilderCard";
 import EmptyState from "@/components/builders/EmptyState";
 import Pagination from "@/components/shared/Pagination";
+import SkeletonRow from "@/components/shared/SkeletonRow";
 import { MOCK_BUILDERS, TOTAL_BUILDERS } from "@/lib/mock-data";
 import type { Builder, SortMode, RowsPerPageOption } from "@/types";
 
@@ -17,6 +18,13 @@ export default function BuildersPage() {
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<RowsPerPageOption>(10);
   const [selectedBuilder, setSelectedBuilder] = useState<Builder | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate initial data load
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Filter builders by search query (name or handle)
   const filtered = useMemo(() => {
@@ -111,7 +119,17 @@ export default function BuildersPage() {
       <BuilderCount count={totalCount} filtered={!!search.trim()} />
 
       {/* Table or Empty State */}
-      {paginated.length === 0 ? (
+      {isLoading ? (
+        <div className="rounded-xl border overflow-hidden">
+          <table className="w-full">
+            <tbody>
+              {Array.from({ length: rowsPerPage }).map((_, i) => (
+                <SkeletonRow key={i} cols={5} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : paginated.length === 0 ? (
         <EmptyState query={search} onClear={() => handleSearchChange("")} />
       ) : (
         <>

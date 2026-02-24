@@ -1,17 +1,24 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import FeaturedSection from "@/components/ecosystems/FeaturedSection";
 import EcosystemStatsBar from "@/components/ecosystems/EcosystemStatsBar";
 import EcosystemSearchBar from "@/components/ecosystems/EcosystemSearchBar";
 import EcosystemCategoryTabs from "@/components/ecosystems/EcosystemCategoryTabs";
 import EcosystemGrid from "@/components/ecosystems/EcosystemGrid";
+import SkeletonCard from "@/components/shared/SkeletonCard";
 import { MOCK_ECOSYSTEMS, ECOSYSTEM_STATS } from "@/lib/mock-data";
 import type { EcosystemCategory } from "@/types";
 
 export default function EcosystemsPage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<EcosystemCategory>("All");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Featured ecosystems (max 3)
   const featured = useMemo(
@@ -101,12 +108,20 @@ export default function EcosystemsPage() {
       )}
 
       {/* Grid */}
-      <EcosystemGrid
-        ecosystems={filtered}
-        query={search}
-        category={category}
-        onClear={handleClear}
-      />
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SkeletonCard key={i} lines={3} showAvatar />
+          ))}
+        </div>
+      ) : (
+        <EcosystemGrid
+          ecosystems={filtered}
+          query={search}
+          category={category}
+          onClear={handleClear}
+        />
+      )}
     </div>
   );
 }
