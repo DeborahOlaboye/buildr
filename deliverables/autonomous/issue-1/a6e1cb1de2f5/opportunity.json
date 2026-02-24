@@ -1,0 +1,18 @@
+{
+  "headline": "GitHub[DeborahOlaboye/buildr]: feat: Build Rewards page with activity tracker and leaderboard",
+  "url": "https://github.com/DeborahOlaboye/buildr/issues/1",
+  "expected_usd": 15000.0,
+  "strategy": "锁定明码 bounty；交付代码+run_log+sample_data，并准备自动交割链接。",
+  "raw_expected": "15000.00 USD",
+  "bounty_literal": "$15,000",
+  "source_line": "## 🚨 发现新商机：GitHub[DeborahOlaboye/buildr]: feat: Build Rewards page with activity tracker and leaderboard",
+  "kind": "generic_automation",
+  "difficulty": 1.0,
+  "score": 15000.0,
+  "oid": "f9f6a0736ca79dcb494b17bd83d10139f2e3cafcf7c7c75e7267944fecca8d66",
+  "payout": {
+    "asset": "USDT",
+    "chain": "EVM",
+    "wallet": "0xF57503F99fA20b912200ed90D26d945093136ef5"
+  }
+}
