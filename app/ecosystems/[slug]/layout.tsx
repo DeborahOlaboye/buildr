@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getInternalUrl } from "@/lib/config";
 
 interface EcosystemSlugLayoutProps {
   children: React.ReactNode;
@@ -6,8 +7,7 @@ interface EcosystemSlugLayoutProps {
 }
 
 async function getEcosystem(slug: string) {
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? `http://localhost:${process.env.PORT ?? 3000}`;
-  const res = await fetch(`${base}/api/ecosystems/${encodeURIComponent(slug)}`, {
+  const res = await fetch(getInternalUrl(`/api/ecosystems/${encodeURIComponent(slug)}`), {
     cache: "no-store",
   });
   if (!res.ok) return null;
