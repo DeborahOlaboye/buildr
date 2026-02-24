@@ -151,3 +151,21 @@ export interface PricingFAQItem {
   question: string;
   answer: string;
 }
+
+// ─── Activity Feed ────────────────────────────────────────────────────────────
+
+export type ActivityEventType =
+  | "contract_deployed"
+  | "github_push"
+  | "reward_claimed"
+  | "ecosystem_joined";
+
+export interface ActivityFeedItem {
+  id: string;
+  builderHandle: string;
+  builderName: string;
+  avatarUrl: string;
+  eventType: ActivityEventType;
+  description: string;
+  timestamp: string; // ISO 8601
+}

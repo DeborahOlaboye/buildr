@@ -6,7 +6,8 @@ import StartEarningCTA from "@/components/rewards/StartEarningCTA";
 import ProgramProgressBar from "@/components/rewards/ProgramProgressBar";
 import FAQSection from "@/components/rewards/FAQSection";
 import RewardsLeaderboard from "@/components/rewards/RewardsLeaderboard";
-import { CURRENT_REWARD_PROGRAM, MOCK_USER_ACTIVITY, FAQ_ITEMS } from "@/lib/mock-data";
+import ActivityFeed from "@/components/rewards/ActivityFeed";
+import { CURRENT_REWARD_PROGRAM, MOCK_USER_ACTIVITY, FAQ_ITEMS, MOCK_ACTIVITY_FEED } from "@/lib/mock-data";
 
 const IS_USER_CONNECTED =
   MOCK_USER_ACTIVITY.wallet.status === "connected" &&
@@ -34,6 +35,7 @@ export default function RewardsPage() {
           </div>
         )}
       </div>
+      <ActivityFeed items={MOCK_ACTIVITY_FEED} />
       <FAQSection items={FAQ_ITEMS} />
       <RewardsLeaderboard />
     </div>
