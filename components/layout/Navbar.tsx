@@ -3,11 +3,15 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Menu, X, Zap } from "lucide-react";
+import { Search, Menu, X, Zap, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import ThemeToggle from "@/components/layout/ThemeToggle";
 import { cn } from "@/lib/utils";
+
+// Simulate subscription state — swap for real auth context when ready
+const IS_PRO = false;
 
 const NAV_LINKS = [
   { href: "/", label: "Rewards" },
@@ -77,10 +81,21 @@ export default function Navbar() {
             </Button>
           )}
           <ThemeToggle />
-          <Button size="sm" className="gap-1.5">
-            <Zap className="h-3.5 w-3.5" />
-            Join Stacks+
-          </Button>
+          {IS_PRO ? (
+            <div className="flex items-center gap-1.5">
+              <Badge className="gap-1 text-xs px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 hover:bg-primary/15">
+                <Star className="h-3 w-3 fill-primary" />
+                Stacks+ Member
+              </Badge>
+            </div>
+          ) : (
+            <Button size="sm" className="gap-1.5" asChild>
+              <Link href="/pricing">
+                <Zap className="h-3.5 w-3.5" />
+                Join Stacks+
+              </Link>
+            </Button>
+          )}
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -118,10 +133,19 @@ export default function Navbar() {
               <div className="flex items-center gap-2 px-1">
                 <Input placeholder="Search builders, projects…" />
               </div>
-              <Button className="w-full mt-3 gap-1.5">
-                <Zap className="h-3.5 w-3.5" />
-                Join Stacks+
-              </Button>
+              {IS_PRO ? (
+                <div className="flex items-center justify-center gap-1.5 mt-3 py-2 rounded-md bg-primary/10 border border-primary/20">
+                  <Star className="h-3.5 w-3.5 fill-primary text-primary" />
+                  <span className="text-sm font-medium text-primary">Stacks+ Member</span>
+                </div>
+              ) : (
+                <Button className="w-full mt-3 gap-1.5" asChild>
+                  <Link href="/pricing">
+                    <Zap className="h-3.5 w-3.5" />
+                    Join Stacks+
+                  </Link>
+                </Button>
+              )}
             </div>
           </nav>
         </div>
