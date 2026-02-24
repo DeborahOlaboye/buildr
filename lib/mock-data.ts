@@ -1,4 +1,4 @@
-import type { Builder, RewardProgram } from "@/types";
+import type { Builder, RewardProgram, UserActivity, FAQItem } from "@/types";
 
 export const MOCK_BUILDERS: Builder[] = [
   {
@@ -1037,8 +1037,6 @@ export const CURRENT_REWARD_PROGRAM: RewardProgram = {
 export const TOTAL_BUILDERS = 549;
 
 // ─── Mock current user activity ───────────────────────────────────────────────
-
-import type { UserActivity, FAQItem } from "@/types";
 
 export const MOCK_USER_ACTIVITY: UserActivity = {
   wallet: {
