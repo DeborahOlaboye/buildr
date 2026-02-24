@@ -34,8 +34,9 @@ export default function EcosystemDetailHero({ ecosystem }: EcosystemDetailHeroPr
       <Link
         href="/ecosystems"
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        aria-label="Back to ecosystems list"
       >
-        <ArrowLeft className="h-4 w-4" />
+        <ArrowLeft className="h-4 w-4" aria-hidden="true" />
         Back to Ecosystems
       </Link>
 
@@ -58,7 +59,7 @@ export default function EcosystemDetailHero({ ecosystem }: EcosystemDetailHeroPr
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-2xl font-bold">{ecosystem.name}</h1>
               {ecosystem.isVerified && (
-                <ShieldCheck className="h-5 w-5 text-primary shrink-0" aria-label="Verified project" />
+                <ShieldCheck className="h-5 w-5 text-primary shrink-0" aria-label="Verified project" title="Verified project" />
               )}
               <span
                 className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${
@@ -80,19 +81,19 @@ export default function EcosystemDetailHero({ ecosystem }: EcosystemDetailHeroPr
         {/* Stats row */}
         <div className="flex flex-wrap gap-4 pt-1 text-sm">
           <div className="flex items-center gap-1.5 text-muted-foreground">
-            <Users className="h-4 w-4 text-primary" />
+            <Users className="h-4 w-4 text-primary" aria-hidden="true" />
             <span className="font-semibold text-foreground">{ecosystem.builderCount}</span>
             <span>builders</span>
           </div>
           {ecosystem.tvl !== null && (
             <div className="flex items-center gap-1.5 text-muted-foreground">
-              <DollarSign className="h-4 w-4 text-primary" />
+              <DollarSign className="h-4 w-4 text-primary" aria-hidden="true" />
               <span className="font-semibold text-foreground">{formatTVL(ecosystem.tvl)}</span>
               <span>TVL</span>
             </div>
           )}
           <div className="flex items-center gap-1.5 text-muted-foreground">
-            <CalendarDays className="h-4 w-4 text-primary" />
+            <CalendarDays className="h-4 w-4 text-primary" aria-hidden="true" />
             <span>Launched {launchYear}</span>
           </div>
         </div>
@@ -100,9 +101,14 @@ export default function EcosystemDetailHero({ ecosystem }: EcosystemDetailHeroPr
         {/* CTA */}
         <div className="pt-1">
           <Button variant="outline" size="sm" className="gap-1.5 text-xs" asChild>
-            <a href={ecosystem.projectUrl} target="_blank" rel="noopener noreferrer">
+            <a
+              href={ecosystem.projectUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${ecosystem.name} project (opens in new tab)`}
+            >
               Visit Project
-              <ExternalLink className="h-3.5 w-3.5 text-muted-foreground" />
+              <ExternalLink className="h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
             </a>
           </Button>
         </div>
