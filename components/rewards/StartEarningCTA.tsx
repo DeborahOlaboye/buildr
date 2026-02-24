@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Wallet, Github, ArrowRight, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -18,21 +19,28 @@ export default function StartEarningCTA() {
       </div>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <Button size="sm" variant="outline" className="gap-2 w-full sm:w-auto">
-          <Wallet className="h-4 w-4" />
-          Connect Wallet
+        <Button size="sm" variant="outline" className="gap-2 w-full sm:w-auto" asChild>
+          <Link href="/connect">
+            <Wallet className="h-4 w-4" />
+            Connect Wallet
+          </Link>
         </Button>
-        <Button size="sm" variant="outline" className="gap-2 w-full sm:w-auto">
-          <Github className="h-4 w-4" />
-          Connect GitHub
+        <Button size="sm" variant="outline" className="gap-2 w-full sm:w-auto" asChild>
+          <Link href="/connect">
+            <Github className="h-4 w-4" />
+            Connect GitHub
+          </Link>
         </Button>
       </div>
 
       <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
-        Already connected?
-        <button className="text-primary hover:underline inline-flex items-center gap-0.5">
+        Already connected?{" "}
+        <Link
+          href="/connect"
+          className="text-primary hover:underline inline-flex items-center gap-0.5"
+        >
           View my activity <ArrowRight className="h-3 w-3" />
-        </button>
+        </Link>
       </p>
     </div>
   );
