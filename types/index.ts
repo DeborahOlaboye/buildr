@@ -120,3 +120,34 @@ export interface EcosystemStats {
   totalBuilders: number;
   totalTVL: number;
 }
+
+// ─── Pricing ──────────────────────────────────────────────────────────────────
+
+export type BillingCycle = "monthly" | "annual";
+
+export type PricingTierId = "free" | "pro" | "enterprise";
+
+export interface PricingFeature {
+  label: string;
+  free: boolean | string;
+  pro: boolean | string;
+  enterprise: boolean | string;
+}
+
+export interface PricingTier {
+  id: PricingTierId;
+  name: string;
+  tagline: string;
+  monthlyPrice: number | null;
+  annualPrice: number | null;
+  currency: string;
+  isRecommended: boolean;
+  ctaLabel: string;
+  features: string[];
+}
+
+export interface PricingFAQItem {
+  id: string;
+  question: string;
+  answer: string;
+}
