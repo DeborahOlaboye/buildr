@@ -67,16 +67,17 @@ export default function ActivityFeedItemComponent({ item }: ActivityFeedItemProp
           <span className="text-muted-foreground">{item.description}</span>
         </p>
         <p className="text-xs text-muted-foreground">
-          {formatRelativeTime(item.timestamp)}
+          <time dateTime={item.timestamp}>{formatRelativeTime(item.timestamp)}</time>
         </p>
       </div>
 
       {/* Event type badge */}
       <span
         className={`hidden sm:inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium shrink-0 ${meta.badgeClass}`}
+        aria-label={meta.label}
       >
-        {meta.icon}
-        {meta.label}
+        <span aria-hidden="true">{meta.icon}</span>
+        <span aria-hidden="true">{meta.label}</span>
       </span>
     </div>
   );
