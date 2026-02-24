@@ -31,17 +31,17 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-sm mb-3">Resources</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">API Docs</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Token</a></li>
+              <li><Link href="/api-docs" className="hover:text-primary transition-colors">API Docs</Link></li>
+              <li><Link href="/blog" className="hover:text-primary transition-colors">Blog</Link></li>
+              <li><Link href="/token" className="hover:text-primary transition-colors">Token</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold text-sm mb-3">Legal</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Privacy</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Terms & Conditions</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Data</a></li>
+              <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy</Link></li>
+              <li><Link href="/terms" className="hover:text-primary transition-colors">Terms &amp; Conditions</Link></li>
+              <li><Link href="/data-policy" className="hover:text-primary transition-colors">Data</Link></li>
             </ul>
           </div>
         </div>
