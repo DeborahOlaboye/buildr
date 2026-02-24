@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Zap } from "lucide-react";
+import { Zap, Github, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -47,7 +47,27 @@ export default function Footer() {
         </div>
         <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} Buildr. Built for the Stacks ecosystem.</p>
-          <p>Powered by Bitcoin.</p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://github.com/buildr-app"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Buildr on GitHub"
+              className="hover:text-primary transition-colors"
+            >
+              <Github className="h-4 w-4" />
+            </a>
+            <a
+              href="https://twitter.com/buildr_app"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Buildr on Twitter"
+              className="hover:text-primary transition-colors"
+            >
+              <Twitter className="h-4 w-4" />
+            </a>
+            <span>Powered by Bitcoin.</span>
+          </div>
         </div>
       </div>
     </footer>
