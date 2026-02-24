@@ -150,3 +150,58 @@
 html {
   scrollbar-gutter: stable;
 }
+
+/* ── Pricing page styles ────────────────────────────────────────────────────── */
+
+/* Recommended tier card highlight ring */
+.pricing-card-recommended {
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.6),
+              0 8px 32px hsl(var(--primary) / 0.15);
+}
+
+/* Pricing card hover lift */
+.pricing-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.pricing-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Annual billing toggle badge pulse */
+@keyframes pricing-badge-in {
+  0%   { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.pricing-save-badge {
+  animation: pricing-badge-in 0.2s ease forwards;
+}
+
+/* Dark mode: deepen the pro column highlight in comparison table */
+.dark .pricing-pro-col {
+  background-color: hsl(var(--primary) / 0.08);
+}
+
+/* Pricing page gradient background wash */
+.pricing-page-root {
+  background: radial-gradient(
+    ellipse 80% 40% at 50% -10%,
+    hsl(var(--primary) / 0.07) 0%,
+    transparent 70%
+  );
+}
+
+/* Trust bar separator dots */
+.trust-bar-dot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: hsl(var(--muted-foreground) / 0.4);
+}
+
+/* Mobile: stack pricing cards full-width */
+@media (max-width: 640px) {
+  .pricing-card {
+    width: 100%;
+  }
+}
