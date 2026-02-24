@@ -30,13 +30,15 @@ export default function FeaturedEcosystemCard({ ecosystem }: FeaturedEcosystemCa
 
   return (
     <div
+      role="article"
+      aria-label={`${ecosystem.name} (Featured)`}
       className={cn(
         "relative rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-5 flex flex-col gap-4",
         "hover:border-primary/40 hover:shadow-lg transition-all duration-200"
       )}
     >
       {/* Featured badge */}
-      <div className="absolute top-4 right-4 flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+      <div className="absolute top-4 right-4 flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary" aria-hidden="true">
         <Star className="h-3 w-3 fill-current" />
         Featured
       </div>
@@ -56,7 +58,7 @@ export default function FeaturedEcosystemCard({ ecosystem }: FeaturedEcosystemCa
           <div className="flex items-center gap-2">
             <h3 className="font-bold text-base">{ecosystem.name}</h3>
             {ecosystem.isVerified && (
-              <ShieldCheck className="h-4 w-4 text-primary" />
+              <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
             )}
           </div>
           <Badge variant={variant} className="text-xs mt-1">
@@ -75,7 +77,7 @@ export default function FeaturedEcosystemCard({ ecosystem }: FeaturedEcosystemCa
         <div>
           <p className="text-xs text-muted-foreground">Builders</p>
           <p className="font-bold flex items-center gap-1">
-            <Users className="h-3.5 w-3.5 text-muted-foreground" />
+            <Users className="h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
             {ecosystem.builderCount}
           </p>
         </div>
@@ -93,8 +95,9 @@ export default function FeaturedEcosystemCard({ ecosystem }: FeaturedEcosystemCa
           href={ecosystem.projectUrl}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={`View ${ecosystem.name} project (opens in new tab)`}
         >
-          <ExternalLink className="h-3.5 w-3.5" />
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
           View Project
         </a>
       </Button>

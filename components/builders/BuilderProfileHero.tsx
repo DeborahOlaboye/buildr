@@ -34,8 +34,9 @@ export default function BuilderProfileHero({ builder }: BuilderProfileHeroProps)
       <Link
         href="/builders"
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        aria-label="Back to builder leaderboard"
       >
-        <ArrowLeft className="h-4 w-4" />
+        <ArrowLeft className="h-4 w-4" aria-hidden="true" />
         Back to Leaderboard
       </Link>
 
@@ -53,7 +54,7 @@ export default function BuilderProfileHero({ builder }: BuilderProfileHeroProps)
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-2xl font-bold truncate">{builder.name}</h1>
               {builder.isVerified && (
-                <ShieldCheck className="h-5 w-5 text-primary shrink-0" aria-label="Verified builder" />
+                <ShieldCheck className="h-5 w-5 text-primary shrink-0" aria-label="Verified builder" title="Verified builder" />
               )}
               <Badge variant="secondary" className="text-xs">
                 {getRankLabel(builder.rank)}
@@ -94,10 +95,11 @@ export default function BuilderProfileHero({ builder }: BuilderProfileHeroProps)
               href={builder.githubProfile}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${builder.name} GitHub profile (opens in new tab)`}
             >
-              <Github className="h-3.5 w-3.5" />
+              <Github className="h-3.5 w-3.5" aria-hidden="true" />
               GitHub
-              <ExternalLink className="h-3 w-3 text-muted-foreground" />
+              <ExternalLink className="h-3 w-3 text-muted-foreground" aria-hidden="true" />
             </a>
           </Button>
         </div>

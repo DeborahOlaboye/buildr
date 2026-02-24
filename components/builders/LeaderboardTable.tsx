@@ -29,19 +29,19 @@ export default function LeaderboardTable({
   return (
     <>
       <div className="w-full overflow-x-auto rounded-lg border">
-        <table className="w-full text-left">
+        <table className="w-full text-left" aria-label="Builder leaderboard">
           <thead>
             <tr className="border-b bg-muted/50">
-              <th className="py-3 pl-4 pr-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide w-12">
+              <th scope="col" className="py-3 pl-4 pr-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide w-12">
                 #
               </th>
-              <th className="py-3 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+              <th scope="col" className="py-3 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
                 Profile
               </th>
-              <th className="py-3 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide hidden sm:table-cell">
+              <th scope="col" className="py-3 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide hidden sm:table-cell">
                 Ecosystem
               </th>
-              <th className="py-3 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide text-right">
+              <th scope="col" className="py-3 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide text-right">
                 {sortMode === "monthly" ? "Monthly Reward" : "All-time Reward"}
               </th>
             </tr>

@@ -30,7 +30,7 @@ export default function EcosystemCard({ ecosystem }: EcosystemCardProps) {
   const variant = CATEGORY_VARIANT[ecosystem.category] ?? "secondary";
 
   return (
-    <Card className="group flex flex-col h-full hover:shadow-md transition-all duration-200 hover:-translate-y-0.5">
+    <Card className="group flex flex-col h-full hover:shadow-md transition-all duration-200 hover:-translate-y-0.5" role="article" aria-label={ecosystem.name}>
       <CardContent className="flex flex-col gap-3 p-5 flex-1">
         {/* Logo + name row */}
         <div className="flex items-center gap-3">
@@ -47,7 +47,7 @@ export default function EcosystemCard({ ecosystem }: EcosystemCardProps) {
             <div className="flex items-center gap-1.5">
               <span className="font-semibold text-sm truncate">{ecosystem.name}</span>
               {ecosystem.isVerified && (
-                <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" aria-hidden="true" />
               )}
             </div>
             <Badge variant={variant} className="text-[10px] mt-0.5">
@@ -64,7 +64,7 @@ export default function EcosystemCard({ ecosystem }: EcosystemCardProps) {
         {/* Stats row */}
         <div className="flex items-center gap-4 text-xs text-muted-foreground mt-auto">
           <span className="flex items-center gap-1">
-            <Users className="h-3.5 w-3.5" />
+            <Users className="h-3.5 w-3.5" aria-hidden="true" />
             <span className="font-medium text-foreground">{ecosystem.builderCount}</span>
             {" "}builders
           </span>
@@ -88,8 +88,9 @@ export default function EcosystemCard({ ecosystem }: EcosystemCardProps) {
             href={ecosystem.projectUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`View ${ecosystem.name} project (opens in new tab)`}
           >
-            <ExternalLink className="h-3.5 w-3.5" />
+            <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
             View Project
           </a>
         </Button>

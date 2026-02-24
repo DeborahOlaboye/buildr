@@ -14,17 +14,17 @@ function formatTVL(tvl: number): string {
 
 const STAT_ITEMS = (stats: EcosystemStats) => [
   {
-    icon: <LayoutGrid className="h-4 w-4" />,
+    icon: <LayoutGrid className="h-4 w-4" aria-hidden="true" />,
     label: "Ecosystems",
     value: stats.totalEcosystems.toLocaleString(),
   },
   {
-    icon: <Users className="h-4 w-4" />,
+    icon: <Users className="h-4 w-4" aria-hidden="true" />,
     label: "Total Builders",
     value: stats.totalBuilders.toLocaleString(),
   },
   {
-    icon: <DollarSign className="h-4 w-4" />,
+    icon: <DollarSign className="h-4 w-4" aria-hidden="true" />,
     label: "Total TVL",
     value: formatTVL(stats.totalTVL),
   },
@@ -37,12 +37,13 @@ export default function EcosystemStatsBar({ stats }: EcosystemStatsBarProps) {
         <div
           key={item.label}
           className="flex flex-col items-center justify-center py-4 px-3 text-center gap-1"
+          aria-label={`${item.label}: ${item.value}`}
         >
-          <div className="flex items-center gap-1.5 text-muted-foreground text-xs">
+          <div className="flex items-center gap-1.5 text-muted-foreground text-xs" aria-hidden="true">
             {item.icon}
             <span>{item.label}</span>
           </div>
-          <span className="text-xl font-bold tabular-nums">{item.value}</span>
+          <span className="text-xl font-bold tabular-nums" aria-hidden="true">{item.value}</span>
         </div>
       ))}
     </div>

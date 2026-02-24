@@ -32,12 +32,14 @@ export default function EcosystemSearchBar({ value, onChange }: EcosystemSearchB
 
   return (
     <div className="relative w-full max-w-sm">
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" aria-hidden="true" />
       <Input
         value={local}
         onChange={handleChange}
         placeholder="Search builders, projects, ecosystems…"
         className="pl-9 pr-9"
+        aria-label="Search builders, projects, ecosystems"
+        role="searchbox"
       />
       {local && (
         <Button

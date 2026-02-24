@@ -88,6 +88,7 @@ export default function LeaderboardRow({
       onClick={() => onClick(builder)}
       role="button"
       tabIndex={0}
+      aria-label={`View profile for ${builder.name}, rank #${builder.rank}`}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") onClick(builder);
       }}
@@ -113,7 +114,7 @@ export default function LeaderboardRow({
             <div className="flex items-center gap-1.5">
               <span className="text-sm font-medium truncate">{builder.name}</span>
               {builder.isVerified && (
-                <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" aria-hidden="true" />
               )}
             </div>
             <span className="text-xs text-muted-foreground">@{builder.handle}</span>
@@ -137,7 +138,7 @@ export default function LeaderboardRow({
             {formatSTX(reward)}
           </span>
           <span className="text-xs text-muted-foreground">$STX</span>
-          <ExternalLink className="h-3 w-3 text-muted-foreground ml-1 opacity-0 group-hover:opacity-100" />
+          <ExternalLink className="h-3 w-3 text-muted-foreground ml-1 opacity-0 group-hover:opacity-100" aria-hidden="true" />
         </div>
       </td>
     </tr>

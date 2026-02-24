@@ -72,7 +72,7 @@ export default function BuilderProfileModal({
               <div className="flex items-center gap-1.5">
                 <DialogTitle className="text-lg">{builder.name}</DialogTitle>
                 {builder.isVerified && (
-                  <ShieldCheck className="h-4 w-4 text-primary" />
+                  <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
                 )}
               </div>
               <DialogDescription className="text-sm">
@@ -107,17 +107,17 @@ export default function BuilderProfileModal({
         {/* Stats */}
         <div className="grid grid-cols-3 gap-2">
           <StatCard
-            icon={<Trophy className="h-4 w-4" />}
+            icon={<Trophy className="h-4 w-4" aria-hidden="true" />}
             label="Monthly Reward"
             value={`${formatSTX(builder.monthlyReward)} STX`}
           />
           <StatCard
-            icon={<Code2 className="h-4 w-4" />}
+            icon={<Code2 className="h-4 w-4" aria-hidden="true" />}
             label="Contracts"
             value={builder.contractsDeployed}
           />
           <StatCard
-            icon={<GitCommit className="h-4 w-4" />}
+            icon={<GitCommit className="h-4 w-4" aria-hidden="true" />}
             label="GH Contributions"
             value={builder.githubContributions}
           />
@@ -126,14 +126,14 @@ export default function BuilderProfileModal({
         {/* Wallet */}
         <div className="rounded-lg border p-3 space-y-2">
           <div className="flex items-center gap-2 text-sm">
-            <Wallet className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+            <Wallet className="h-4 w-4 text-muted-foreground flex-shrink-0" aria-hidden="true" />
             <span className="font-medium">Stacks Wallet</span>
             <code className="ml-auto text-xs text-muted-foreground font-mono">
               {truncateAddress(builder.walletAddress)}
             </code>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <Github className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+            <Github className="h-4 w-4 text-muted-foreground flex-shrink-0" aria-hidden="true" />
             <span className="font-medium">GitHub</span>
             <a
               href={builder.githubProfile}
@@ -141,9 +141,10 @@ export default function BuilderProfileModal({
               rel="noopener noreferrer"
               className="ml-auto text-xs text-primary hover:underline flex items-center gap-1"
               onClick={(e) => e.stopPropagation()}
+              aria-label={`${builder.handle} GitHub profile (opens in new tab)`}
             >
               @{builder.handle}
-              <ExternalLink className="h-3 w-3" />
+              <ExternalLink className="h-3 w-3" aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -165,8 +166,9 @@ export default function BuilderProfileModal({
               href={builder.githubProfile}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View ${builder.name} on GitHub (opens in new tab)`}
             >
-              <Github className="h-4 w-4" />
+              <Github className="h-4 w-4" aria-hidden="true" />
               View GitHub
             </a>
           </Button>
