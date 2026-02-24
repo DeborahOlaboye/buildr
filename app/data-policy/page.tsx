@@ -1,6 +1,7 @@
 import React from "react";
-import Link from "next/link";
-import { ArrowLeft, Database, GitBranch, Wallet, BarChart3 } from "lucide-react";
+import { Database, GitBranch, Wallet, BarChart3 } from "lucide-react";
+import LegalPageHeader from "@/components/legal/LegalPageHeader";
+import LegalLinksBar from "@/components/legal/LegalLinksBar";
 
 const LAST_UPDATED = "February 1, 2025";
 
@@ -31,15 +32,7 @@ export default function DataPolicyPage() {
   return (
     <div className="container max-w-3xl mx-auto px-4 py-12 space-y-10">
       <div className="space-y-3">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to home
-        </Link>
-        <h1 className="text-3xl font-bold tracking-tight">Data Policy</h1>
-        <p className="text-sm text-muted-foreground">Last updated: {LAST_UPDATED}</p>
+        <LegalPageHeader title="Data Policy" lastUpdated={LAST_UPDATED} />
         <p className="text-muted-foreground">
           Buildr is built on transparency. Here&apos;s a plain-language breakdown of exactly
           what data we collect, where it comes from, and how it&apos;s used.
@@ -118,10 +111,7 @@ export default function DataPolicyPage() {
         </p>
       </section>
 
-      <div className="border-t pt-6 flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground">
-        <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-        <Link href="/terms" className="hover:text-primary transition-colors">Terms &amp; Conditions</Link>
-      </div>
+      <LegalLinksBar current="/data-policy" />
     </div>
   );
 }
