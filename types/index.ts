@@ -169,3 +169,38 @@ export interface ActivityFeedItem {
   description: string;
   timestamp: string; // ISO 8601
 }
+
+// ─── Search ───────────────────────────────────────────────────────────────────
+
+export type SearchResultKind = "builder" | "ecosystem";
+
+export interface BuilderSearchResult {
+  kind: "builder";
+  id: string;
+  handle: string;
+  name: string;
+  avatarUrl: string;
+  rank: number;
+  monthlyReward: number;
+  isVerified: boolean;
+  ecosystem: string[];
+}
+
+export interface EcosystemSearchResult {
+  kind: "ecosystem";
+  id: string;
+  slug: string;
+  name: string;
+  logoUrl: string;
+  category: string;
+  builderCount: number;
+  isVerified: boolean;
+  isFeatured: boolean;
+}
+
+export interface SearchApiResponse {
+  query: string;
+  builders: BuilderSearchResult[];
+  ecosystems: EcosystemSearchResult[];
+  total: number;
+}
