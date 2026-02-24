@@ -26,7 +26,7 @@ export default function RewardsBanner({ program }: RewardsBannerProps) {
         <div className="space-y-3">
           {/* ecosystem chip */}
           <div className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700 dark:border-orange-800 dark:bg-orange-900/40 dark:text-orange-300">
-            <Zap className="h-3 w-3" />
+            <Zap className="h-3 w-3" aria-hidden="true" />
             {program.ecosystem}
           </div>
 
@@ -36,26 +36,31 @@ export default function RewardsBanner({ program }: RewardsBannerProps) {
 
           <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
             <span className="flex items-center gap-1.5">
-              <Calendar className="h-4 w-4" />
-              {formatDateRange(program.startDate, program.endDate)}
+              <Calendar className="h-4 w-4" aria-hidden="true" />
+              <time dateTime={`${program.startDate}/${program.endDate}`}>
+                {formatDateRange(program.startDate, program.endDate)}
+              </time>
             </span>
             <span className="flex items-center gap-1.5">
-              <Users className="h-4 w-4" />
+              <Users className="h-4 w-4" aria-hidden="true" />
               {program.winnerCount} Winners / month
             </span>
           </div>
         </div>
 
         {/* Right: prize pool */}
-        <div className="flex flex-col items-center justify-center rounded-xl border bg-background/80 backdrop-blur px-6 py-4 text-center shadow-sm min-w-[140px]">
-          <Trophy className="h-5 w-5 text-primary mb-1" />
-          <span className="text-3xl font-extrabold tabular-nums text-primary">
+        <div
+          className="flex flex-col items-center justify-center rounded-xl border bg-background/80 backdrop-blur px-6 py-4 text-center shadow-sm min-w-[140px]"
+          aria-label={`Prize pool: ${formatSTX(program.totalPrize)} ${program.currency}`}
+        >
+          <Trophy className="h-5 w-5 text-primary mb-1" aria-hidden="true" />
+          <span className="text-3xl font-extrabold tabular-nums text-primary" aria-hidden="true">
             {formatSTX(program.totalPrize).split(".")[0]}
           </span>
-          <span className="text-sm font-semibold text-muted-foreground">
+          <span className="text-sm font-semibold text-muted-foreground" aria-hidden="true">
             ${program.currency}
           </span>
-          <span className="text-xs text-muted-foreground mt-0.5">
+          <span className="text-xs text-muted-foreground mt-0.5" aria-hidden="true">
             Prize Pool
           </span>
         </div>
