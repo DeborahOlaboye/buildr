@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import type { Metadata } from "next";
 import SearchBar from "@/components/builders/SearchBar";
 import SortToggle from "@/components/builders/SortToggle";
 import BuilderCount from "@/components/builders/BuilderCount";
