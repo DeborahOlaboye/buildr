@@ -11,6 +11,7 @@ import SearchLoadingSkeleton from "@/components/search/SearchLoadingSkeleton";
 import { Input } from "@/components/ui/input";
 import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SearchSuggestions from "@/components/search/SearchSuggestions";
 import type { SearchApiResponse } from "@/types";
 
 export default function SearchPage() {
@@ -115,11 +116,7 @@ export default function SearchPage() {
         </div>
       )}
 
-      {!isLoading && !results && !query && (
-        <p className="text-muted-foreground text-sm text-center py-16">
-          Start typing to search builders and ecosystems.
-        </p>
-      )}
+      {!isLoading && !results && !query && <SearchSuggestions />}
     </div>
   );
 }
