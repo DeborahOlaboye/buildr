@@ -53,3 +53,36 @@ export interface RewardProgram {
   endDate: string;
   ecosystem: string;
 }
+
+// ─── User Activity ────────────────────────────────────────────────────────────
+
+export type ConnectionStatus = "connected" | "disconnected";
+
+export interface WalletConnection {
+  status: ConnectionStatus;
+  address: string | null;
+  count: number;
+}
+
+export interface GitHubConnection {
+  status: ConnectionStatus;
+  handle: string | null;
+  contributions: number;
+}
+
+export interface UserActivity {
+  wallet: WalletConnection;
+  github: GitHubConnection;
+  contractsDeployed: number;
+  estimatedReward: number;
+  rank: number | null;
+  rewardCompleted: boolean;
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+export interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+}
