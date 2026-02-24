@@ -86,3 +86,37 @@ export interface FAQItem {
   question: string;
   answer: string;
 }
+
+// ─── Ecosystem ────────────────────────────────────────────────────────────────
+
+export type EcosystemCategory =
+  | "All"
+  | "DeFi"
+  | "NFT"
+  | "Gaming"
+  | "Infrastructure"
+  | "Social"
+  | "DAO";
+
+export interface Ecosystem {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  category: Exclude<EcosystemCategory, "All">;
+  logoUrl: string;
+  builderCount: number;
+  tvl: number | null;
+  projectUrl: string;
+  isFeatured: boolean;
+  isVerified: boolean;
+  launchDate: string;
+}
+
+// ─── Ecosystem Stats ──────────────────────────────────────────────────────────
+
+export interface EcosystemStats {
+  totalEcosystems: number;
+  totalBuilders: number;
+  totalTVL: number;
+}
