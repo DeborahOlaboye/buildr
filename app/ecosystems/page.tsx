@@ -50,6 +50,16 @@ export default function EcosystemsPage() {
 
   function handleCategoryChange(cat: EcosystemCategory) {
     setCategory(cat);
+    // Reset search when switching category so results are not doubly filtered
+    setSearch("");
+  }
+
+  function handleSearchChange(value: string) {
+    setSearch(value);
+    // Reset to All when user types a new search query
+    if (value.trim() && category !== "All") {
+      setCategory("All");
+    }
   }
 
   return (
@@ -78,7 +88,7 @@ export default function EcosystemsPage() {
           counts={categoryCounts}
         />
         <div className="sm:ml-auto w-full sm:w-auto">
-          <EcosystemSearchBar value={search} onChange={setSearch} />
+          <EcosystemSearchBar value={search} onChange={handleSearchChange} />
         </div>
       </div>
 
