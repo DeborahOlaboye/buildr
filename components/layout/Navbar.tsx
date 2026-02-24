@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Search, Menu, X, Zap, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -20,13 +20,61 @@ const NAV_LINKS = [
   { href: "/pricing", label: "Pricing" },
 ];
 
-// Connect CTA shown when the user is not yet connected/authenticated
 const CONNECT_HREF = "/connect";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [mobileSearchValue, setMobileSearchValue] = useState("");
+  const desktopInputRef = useRef<HTMLInputElement>(null);
+
+  // Pre-fill search input when on the /search page
+  useEffect(() => {
+    if (pathname === "/search") {
+      const q = searchParams.get("q") ?? "";
+      setSearchValue(q);
+      setMobileSearchValue(q);
+      if (q) setSearchOpen(true);
+    }
+  }, [pathname, searchParams]);
+
+  // Cmd/Ctrl+K shortcut to open and focus search
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen(true);
+        setTimeout(() => desktopInputRef.current?.focus(), 50);
+      }
+      if (e.key === "Escape" && searchOpen) {
+        setSearchOpen(false);
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [searchOpen]);
+
+  function handleDesktopSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const q = searchValue.trim();
+    if (q) {
+      router.push(`/search?q=${encodeURIComponent(q)}`);
+      setSearchOpen(false);
+    }
+  }
+
+  function handleMobileSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const q = mobileSearchValue.trim();
+    if (q) {
+      router.push(`/search?q=${encodeURIComponent(q)}`);
+      setMobileOpen(false);
+    }
+  }
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -60,25 +108,38 @@ export default function Navbar() {
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-3">
           {searchOpen ? (
-            <div className="flex items-center gap-2">
-              <Input
-                placeholder="Search builders, projects…"
-                className="w-56"
-                autoFocus
-              />
+            <form onSubmit={handleDesktopSubmit} className="flex items-center gap-2">
+              <div className="relative">
+                <Input
+                  ref={desktopInputRef}
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
+                  placeholder="Search builders, projects…"
+                  className="w-56 pr-16"
+                  autoFocus
+                  aria-label="Search"
+                />
+                <kbd className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-60 sm:flex">
+                  ESC
+                </kbd>
+              </div>
               <Button
+                type="button"
                 variant="ghost"
                 size="icon"
-                onClick={() => setSearchOpen(false)}
+                onClick={() => { setSearchOpen(false); setSearchValue(""); }}
+                aria-label="Close search"
               >
                 <X className="h-4 w-4" />
               </Button>
-            </div>
+            </form>
           ) : (
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setSearchOpen(true)}
+              onClick={() => { setSearchOpen(true); setTimeout(() => desktopInputRef.current?.focus(), 50); }}
+              aria-label="Open search (⌘K)"
+              title="Search (⌘K)"
             >
               <Search className="h-4 w-4" />
             </Button>
@@ -138,9 +199,19 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="pt-3 border-t mt-2">
-              <div className="flex items-center gap-2 px-1">
-                <Input placeholder="Search builders, projects…" />
-              </div>
+              <form onSubmit={handleMobileSubmit} className="flex items-center gap-2 px-1">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                  <Input
+                    value={mobileSearchValue}
+                    onChange={(e) => setMobileSearchValue(e.target.value)}
+                    placeholder="Search builders, projects…"
+                    className="pl-9"
+                    aria-label="Mobile search"
+                  />
+                </div>
+                <Button type="submit" size="sm">Go</Button>
+              </form>
               {IS_PRO ? (
                 <div className="flex items-center justify-center gap-1.5 mt-3 py-2 rounded-md bg-primary/10 border border-primary/20">
                   <Star className="h-3.5 w-3.5 fill-primary text-primary" />
