@@ -4,12 +4,12 @@ import { Zap, Github, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-background">
+    <footer className="border-t bg-background" aria-label="Site footer">
       <div className="container py-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <Link href="/" className="flex items-center gap-2 font-bold mb-3">
-              <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+            <Link href="/" className="flex items-center gap-2 font-bold mb-3" aria-label="Buildr home">
+              <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground" aria-hidden="true">
                 <Zap className="h-3 w-3" />
               </span>
               Buildr
@@ -56,7 +56,7 @@ export default function Footer() {
               aria-label="Buildr on GitHub"
               className="hover:text-primary transition-colors"
             >
-              <Github className="h-4 w-4" />
+              <Github className="h-4 w-4" aria-hidden="true" />
             </a>
             <a
               href="https://twitter.com/buildr_app"
@@ -65,7 +65,7 @@ export default function Footer() {
               aria-label="Buildr on Twitter"
               className="hover:text-primary transition-colors"
             >
-              <Twitter className="h-4 w-4" />
+              <Twitter className="h-4 w-4" aria-hidden="true" />
             </a>
             <span>Powered by Bitcoin.</span>
           </div>
