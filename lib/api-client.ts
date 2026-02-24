@@ -4,6 +4,7 @@
  * absolute URL (using the internal base URL), or import from lib/data-access.ts.
  */
 
+import { publicConfig } from "@/lib/config";
 import type {
   BuildersApiResponse,
   BuilderApiResponse,
@@ -18,8 +19,7 @@ import type {
 
 function getBaseUrl(): string {
   if (typeof window !== "undefined") return "";
-  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
-  return `http://localhost:${process.env.PORT ?? 3000}`;
+  return publicConfig.baseUrl;
 }
 
 async function apiFetch<T>(path: string): Promise<T> {
