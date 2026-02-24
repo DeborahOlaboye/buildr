@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getInternalUrl } from "@/lib/config";
 
 interface BuilderLayoutProps {
   children: React.ReactNode;
@@ -6,8 +7,7 @@ interface BuilderLayoutProps {
 }
 
 async function getBuilder(handle: string) {
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? `http://localhost:${process.env.PORT ?? 3000}`;
-  const res = await fetch(`${base}/api/builders/${encodeURIComponent(handle)}`, {
+  const res = await fetch(getInternalUrl(`/api/builders/${encodeURIComponent(handle)}`), {
     cache: "no-store",
   });
   if (!res.ok) return null;

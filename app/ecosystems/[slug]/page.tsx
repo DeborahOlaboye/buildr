@@ -3,14 +3,14 @@ import { Separator } from "@/components/ui/separator";
 import EcosystemDetailHero from "@/components/ecosystems/EcosystemDetailHero";
 import EcosystemBuildersList from "@/components/ecosystems/EcosystemBuildersList";
 import EcosystemNotFound from "@/components/ecosystems/EcosystemNotFound";
+import { getInternalUrl } from "@/lib/config";
 
 interface EcosystemDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
 async function getEcosystemDetail(slug: string) {
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? `http://localhost:${process.env.PORT ?? 3000}`;
-  const res = await fetch(`${base}/api/ecosystems/${encodeURIComponent(slug)}`, {
+  const res = await fetch(getInternalUrl(`/api/ecosystems/${encodeURIComponent(slug)}`), {
     cache: "no-store",
   });
   if (!res.ok) return null;

@@ -8,18 +8,17 @@ import FAQSection from "@/components/rewards/FAQSection";
 import RewardsLeaderboard from "@/components/rewards/RewardsLeaderboard";
 import ActivityFeed from "@/components/rewards/ActivityFeed";
 import { MOCK_USER_ACTIVITY } from "@/lib/mock-data";
+import { getInternalUrl } from "@/lib/config";
 import type { RewardsApiResponse, ActivityApiResponse } from "@/types";
 
 async function getRewardsData(): Promise<RewardsApiResponse | null> {
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? `http://localhost:${process.env.PORT ?? 3000}`;
-  const res = await fetch(`${base}/api/rewards`, { cache: "no-store" });
+  const res = await fetch(getInternalUrl("/api/rewards"), { cache: "no-store" });
   if (!res.ok) return null;
   return res.json();
 }
 
 async function getActivityFeed(): Promise<ActivityApiResponse | null> {
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? `http://localhost:${process.env.PORT ?? 3000}`;
-  const res = await fetch(`${base}/api/activity?limit=10`, { cache: "no-store" });
+  const res = await fetch(getInternalUrl("/api/activity?limit=10"), { cache: "no-store" });
   if (!res.ok) return null;
   return res.json();
 }
