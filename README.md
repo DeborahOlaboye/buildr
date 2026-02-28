@@ -1,5 +1,9 @@
 # Buildr
 
+> **Note:** This repository has been upgraded to Next.js 15.2.0 to address known security vulnerabilities and improve performance.
+> See CHANGELOG.md for upgrade details.
+
+
 **Buildr** is a builder rewards and ecosystem discovery platform built natively on [Stacks](https://www.stacks.co/) — the Bitcoin Layer 2 for smart contracts. It tracks onchain activity and GitHub contributions from Stacks developers, ranks them on a live leaderboard, and distributes monthly $STX rewards to the most impactful builders in the Bitcoin L2 ecosystem.
 
 ---
