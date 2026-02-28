@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import { NextRequest, NextResponse } from "next/server";
 import { MOCK_ACTIVITY_FEED } from "@/lib/mock-data";
 import type { ActivityApiResponse } from "@/types";

@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // experimental improvements enabled for Next.js 15.2
+  experimental: {
+    forceSwcTransforms: true,
+  },
   images: {
     remotePatterns: [
       {

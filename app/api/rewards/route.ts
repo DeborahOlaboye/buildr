@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import { NextResponse } from "next/server";
 import { CURRENT_REWARD_PROGRAM, MOCK_BUILDERS, FAQ_ITEMS } from "@/lib/mock-data";
 import type { RewardsApiResponse } from "@/types";

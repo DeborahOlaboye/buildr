@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import { NextRequest, NextResponse } from "next/server";
 import { MOCK_BUILDERS, MOCK_ECOSYSTEMS } from "@/lib/mock-data";
 import type {

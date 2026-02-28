@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import { NextResponse } from "next/server";
 import { PRICING_TIERS, PRICING_FEATURES, PRICING_FAQ } from "@/lib/mock-data";
 import type { PricingApiResponse } from "@/types";
