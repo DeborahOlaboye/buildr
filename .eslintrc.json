@@ -1,3 +1,8 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript", "plugin:@next/next/recommended"],
+  "rules": {
+    "@next/next/no-html-link-for-pages": "off", // project uses custom routing
+    "react/react-in-jsx-scope": "off",
+    "@next/next/no-img-element": "warn"
+  }
 }
