@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { axe } from 'jest-axe';
 import { Button } from './button';
 
 describe('Button component', () => {
@@ -19,5 +20,11 @@ describe('Button component', () => {
     const LinkMock = ({children, ...props}: any) => <a {...props}>{children}</a>;
     render(<Button asChild><LinkMock>Link</LinkMock></Button>);
     expect(screen.getByText('Link').tagName).toBe('A');
+  });
+
+  test('has no accessibility violations', async () => {
+    const { container } = render(<Button>Accessible</Button>);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });
