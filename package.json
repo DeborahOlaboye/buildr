@@ -28,7 +28,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^2.6.0"
-  }
+  },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
@@ -43,6 +43,8 @@
     "ts-jest": "^29.0.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/jest-dom": "^6.0.0",
-    "@testing-library/user-event": "^14.0.0"
+    "@testing-library/user-event": "^14.0.0",
+    "jest-axe": "^7.0.0",
+    "axe-core": "^5.0.0"
   }
 }
