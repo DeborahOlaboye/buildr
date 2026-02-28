@@ -23,6 +23,8 @@ async function getActivityFeed(): Promise<ActivityApiResponse | null> {
   return res.json();
 }
 
+export const dynamic = 'force-static';
+
 const IS_USER_CONNECTED =
   MOCK_USER_ACTIVITY.wallet.status === "connected" &&
   MOCK_USER_ACTIVITY.github.status === "connected";
