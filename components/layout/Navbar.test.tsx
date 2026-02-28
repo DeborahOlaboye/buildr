@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { axe } from 'jest-axe';
 import Navbar from './Navbar';
 
 jest.mock('next/link', () => {
@@ -19,5 +20,11 @@ describe('Navbar component', () => {
     render(<Navbar />);
     const searchButton = screen.getByLabelText(/Open search/i);
     expect(searchButton).toBeInTheDocument();
+  });
+
+  test('has no accessibility violations', async () => {
+    const { container } = render(<Navbar />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });
