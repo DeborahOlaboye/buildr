@@ -12,6 +12,8 @@
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch"
   },
+  "lint:accessibility": "eslint --ext .tsx,.jsx --rule 'jsx-a11y/alt-text:warn'"
+
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-avatar": "^1.1.3",
