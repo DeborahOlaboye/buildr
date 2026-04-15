@@ -1,23 +1,17 @@
+import React from "react";
 import type { Metadata } from "next";
-import { getInternalUrl } from "@/lib/config";
+import { MOCK_BUILDERS } from "@/lib/mock-data";
 
 interface BuilderLayoutProps {
   children: React.ReactNode;
   params: Promise<{ handle: string }>;
 }
 
-async function getBuilder(handle: string) {
-  const res = await fetch(getInternalUrl(`/api/builders/${encodeURIComponent(handle)}`), {
-    cache: "no-store",
-  });
-  if (!res.ok) return null;
-  const data = await res.json();
-  return data.builder ?? null;
-}
-
 export async function generateMetadata({ params }: BuilderLayoutProps): Promise<Metadata> {
   const { handle } = await params;
-  const builder = await getBuilder(handle);
+  const builder = MOCK_BUILDERS.find(
+    (b) => b.handle.toLowerCase() === handle.toLowerCase()
+  ) ?? null;
 
   if (!builder) {
     return {
