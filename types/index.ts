@@ -204,3 +204,44 @@ export interface SearchApiResponse {
   ecosystems: EcosystemSearchResult[];
   total: number;
 }
+
+// ─── API Responses ────────────────────────────────────────────────────────────
+
+export interface ActivityApiResponse {
+  items: ActivityFeedItem[];
+}
+
+export interface BuilderApiResponse {
+  builder: Builder;
+}
+
+export interface BuildersApiResponse {
+  builders: Builder[];
+  total: number;
+  page: number;
+  rowsPerPage: number;
+  topThree: Builder[];
+}
+
+export interface EcosystemsApiResponse {
+  ecosystems: Ecosystem[];
+  total: number;
+  page: number;
+  rowsPerPage: number;
+  featured: Ecosystem[];
+  stats: EcosystemStats;
+  categoryCounts: Record<string, number>;
+}
+
+export interface PricingApiResponse {
+  tiers: PricingTier[];
+  features: PricingFeature[];
+  faq: PricingFAQItem[];
+}
+
+export interface RewardsApiResponse {
+  program: RewardProgram;
+  topBuilders: Builder[];
+  totalBuilders: number;
+  faqItems: FAQItem[];
+}
