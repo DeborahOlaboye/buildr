@@ -22,7 +22,7 @@ export default function ConnectCompleteState({
 
       {/* Message */}
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">You're all set!</h2>
+        <h2 className="text-2xl font-bold">You&apos;re all set!</h2>
         <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed">
           Your wallet and GitHub are connected. Buildr will now track your onchain
           activity and contributions to calculate your $STX rewards.
