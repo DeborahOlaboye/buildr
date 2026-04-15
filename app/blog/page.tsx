@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Calendar, Clock } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 
 const POSTS = [
   {
