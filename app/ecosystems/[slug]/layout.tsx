@@ -1,23 +1,17 @@
+import React from "react";
 import type { Metadata } from "next";
-import { getInternalUrl } from "@/lib/config";
+import { MOCK_ECOSYSTEMS } from "@/lib/mock-data";
 
 interface EcosystemSlugLayoutProps {
   children: React.ReactNode;
   params: Promise<{ slug: string }>;
 }
 
-async function getEcosystem(slug: string) {
-  const res = await fetch(getInternalUrl(`/api/ecosystems/${encodeURIComponent(slug)}`), {
-    cache: "no-store",
-  });
-  if (!res.ok) return null;
-  const data = await res.json();
-  return data.ecosystem ?? null;
-}
-
 export async function generateMetadata({ params }: EcosystemSlugLayoutProps): Promise<Metadata> {
   const { slug } = await params;
-  const ecosystem = await getEcosystem(slug);
+  const ecosystem = MOCK_ECOSYSTEMS.find(
+    (e) => e.slug.toLowerCase() === slug.toLowerCase()
+  ) ?? null;
 
   if (!ecosystem) {
     return {
