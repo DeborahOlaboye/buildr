@@ -54,7 +54,7 @@ export default function BuilderProfileHero({ builder }: BuilderProfileHeroProps)
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-2xl font-bold truncate">{builder.name}</h1>
               {builder.isVerified && (
-                <ShieldCheck className="h-5 w-5 text-primary shrink-0" aria-label="Verified builder" title="Verified builder" />
+                <ShieldCheck className="h-5 w-5 text-primary shrink-0" aria-label="Verified builder" />
               )}
               <Badge variant="secondary" className="text-xs">
                 {getRankLabel(builder.rank)}
