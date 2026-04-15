@@ -20,7 +20,7 @@ export default function NotFound() {
         </div>
         <h1 className="text-2xl font-bold">Page not found</h1>
         <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed">
-          This page doesn't exist on Buildr. It may have been moved, deleted,
+          This page doesn&apos;t exist on Buildr. It may have been moved, deleted,
           or you may have followed a broken link.
         </p>
       </div>
