@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { FileCode2, GitCommit, Coins, PackagePlus } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { formatRelativeTime } from "@/lib/utils";
 import type { ActivityFeedItem, ActivityEventType } from "@/types";
 

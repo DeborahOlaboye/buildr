@@ -16,7 +16,7 @@ export default function EnterpriseCallout() {
         </div>
         <h3 className="text-xl font-bold">Building an ecosystem on Stacks?</h3>
         <p className="text-sm text-muted-foreground mt-2 max-w-md mx-auto leading-relaxed">
-          Enterprise plans include custom reward programs, ecosystem spotlight placement, dedicated onboarding, and unlimited API access. Let's build together.
+          Enterprise plans include custom reward programs, ecosystem spotlight placement, dedicated onboarding, and unlimited API access. Let&apos;s build together.
         </p>
         <Button className="mt-5 gap-2" asChild>
           <a href="mailto:hello@buildr.xyz">

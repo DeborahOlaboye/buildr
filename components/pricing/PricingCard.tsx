@@ -11,12 +11,6 @@ interface PricingCardProps {
   billing: BillingCycle;
 }
 
-function formatPrice(price: number | null, billing: BillingCycle): string {
-  if (price === null) return "Custom";
-  if (price === 0) return "Free";
-  return `$${billing === "annual" ? price : price}`;
-}
-
 export default function PricingCard({ tier, billing }: PricingCardProps) {
   const price =
     billing === "annual" ? tier.annualPrice : tier.monthlyPrice;

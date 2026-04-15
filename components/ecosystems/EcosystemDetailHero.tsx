@@ -59,7 +59,7 @@ export default function EcosystemDetailHero({ ecosystem }: EcosystemDetailHeroPr
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-2xl font-bold">{ecosystem.name}</h1>
               {ecosystem.isVerified && (
-                <ShieldCheck className="h-5 w-5 text-primary shrink-0" aria-label="Verified project" title="Verified project" />
+                <ShieldCheck className="h-5 w-5 text-primary shrink-0" aria-label="Verified project" />
               )}
               <span
                 className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${

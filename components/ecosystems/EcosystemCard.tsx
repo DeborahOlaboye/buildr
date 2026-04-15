@@ -4,7 +4,6 @@ import { Users, ExternalLink, ShieldCheck } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import type { Ecosystem } from "@/types";
 
 interface EcosystemCardProps {

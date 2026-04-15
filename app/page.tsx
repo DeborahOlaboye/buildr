@@ -1,4 +1,12 @@
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  other: {
+    "talentapp:project_verification":
+      "3c7a971c1139d65b2ffe91b1c1d1ad3d686c14932151307db82526caf13ce1e6eb49561207afdbdd15c66d847a3b45ad8a742e4f18d256213f1009bc14477887",
+  },
+};
 import RewardsBanner from "@/components/rewards/RewardsBanner";
 import ActivitySection from "@/components/rewards/ActivitySection";
 import MonthlyRewardSummary from "@/components/rewards/MonthlyRewardSummary";
@@ -7,46 +15,24 @@ import ProgramProgressBar from "@/components/rewards/ProgramProgressBar";
 import FAQSection from "@/components/rewards/FAQSection";
 import RewardsLeaderboard from "@/components/rewards/RewardsLeaderboard";
 import ActivityFeed from "@/components/rewards/ActivityFeed";
-import { MOCK_USER_ACTIVITY } from "@/lib/mock-data";
-import { getInternalUrl } from "@/lib/config";
-import type { RewardsApiResponse, ActivityApiResponse } from "@/types";
-
-async function getRewardsData(): Promise<RewardsApiResponse | null> {
-  const res = await fetch(getInternalUrl("/api/rewards"), { cache: "no-store" });
-  if (!res.ok) return null;
-  return res.json();
-}
-
-async function getActivityFeed(): Promise<ActivityApiResponse | null> {
-  const res = await fetch(getInternalUrl("/api/activity?limit=10"), { cache: "no-store" });
-  if (!res.ok) return null;
-  return res.json();
-}
-
-export const dynamic = 'force-static';
+import {
+  MOCK_USER_ACTIVITY,
+  CURRENT_REWARD_PROGRAM,
+  FAQ_ITEMS,
+  MOCK_ACTIVITY_FEED,
+} from "@/lib/mock-data";
 
 const IS_USER_CONNECTED =
   MOCK_USER_ACTIVITY.wallet.status === "connected" &&
   MOCK_USER_ACTIVITY.github.status === "connected";
 
-export default async function RewardsPage() {
-  const [rewardsData, activityData] = await Promise.all([
-    getRewardsData(),
-    getActivityFeed(),
-  ]);
-
-  if (!rewardsData) {
-    return (
-      <div className="container py-8">
-        <p className="text-muted-foreground">Failed to load rewards data.</p>
-      </div>
-    );
-  }
+export default function RewardsPage() {
+  const activityItems = MOCK_ACTIVITY_FEED.slice(0, 10);
 
   return (
     <div className="container py-8 space-y-10">
-      <RewardsBanner program={rewardsData.program} />
-      <ProgramProgressBar program={rewardsData.program} />
+      <RewardsBanner program={CURRENT_REWARD_PROGRAM} />
+      <ProgramProgressBar program={CURRENT_REWARD_PROGRAM} />
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
           {IS_USER_CONNECTED ? (
@@ -59,13 +45,13 @@ export default async function RewardsPage() {
           <div className="lg:col-span-1">
             <MonthlyRewardSummary
               activity={MOCK_USER_ACTIVITY}
-              programName={rewardsData.program.name}
+              programName={CURRENT_REWARD_PROGRAM.name}
             />
           </div>
         )}
       </div>
-      {activityData && <ActivityFeed items={activityData.items} />}
-      <FAQSection items={rewardsData.faqItems} />
+      <ActivityFeed items={activityItems} />
+      <FAQSection items={FAQ_ITEMS} />
       <RewardsLeaderboard />
     </div>
   );

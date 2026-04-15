@@ -18,7 +18,7 @@ export default function EmptyState({ query, onClear }: EmptyStateProps) {
         <h3 className="text-lg font-semibold">No results found</h3>
         <p className="text-sm text-muted-foreground mt-1 max-w-xs">
           No builders matched{" "}
-          <span className="font-medium text-foreground">"{query}"</span>.
+          <span className="font-medium text-foreground">&quot;{query}&quot;</span>.
           Try a different name or handle.
         </p>
       </div>

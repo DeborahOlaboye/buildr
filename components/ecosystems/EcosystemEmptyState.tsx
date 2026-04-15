@@ -28,7 +28,7 @@ export default function EcosystemEmptyState({
           {hasQuery && (
             <>
               No results for{" "}
-              <span className="font-medium text-foreground">"{query}"</span>
+              <span className="font-medium text-foreground">&quot;{query}&quot;</span>
               {hasCategory && (
                 <> in <span className="font-medium text-foreground">{category}</span></>
               )}

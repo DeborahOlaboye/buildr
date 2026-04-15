@@ -3,29 +3,25 @@ import { Separator } from "@/components/ui/separator";
 import EcosystemDetailHero from "@/components/ecosystems/EcosystemDetailHero";
 import EcosystemBuildersList from "@/components/ecosystems/EcosystemBuildersList";
 import EcosystemNotFound from "@/components/ecosystems/EcosystemNotFound";
-import { getInternalUrl } from "@/lib/config";
+import { MOCK_ECOSYSTEMS, MOCK_BUILDERS } from "@/lib/mock-data";
 
 interface EcosystemDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
-async function getEcosystemDetail(slug: string) {
-  const res = await fetch(getInternalUrl(`/api/ecosystems/${encodeURIComponent(slug)}`), {
-    cache: "no-store",
-  });
-  if (!res.ok) return null;
-  return res.json();
-}
-
 export default async function EcosystemDetailPage({ params }: EcosystemDetailPageProps) {
   const { slug } = await params;
-  const detail = await getEcosystemDetail(slug);
+  const ecosystem = MOCK_ECOSYSTEMS.find(
+    (e) => e.slug.toLowerCase() === slug.toLowerCase()
+  ) ?? null;
 
-  if (!detail) {
+  if (!ecosystem) {
     return <EcosystemNotFound slug={slug} />;
   }
 
-  const { ecosystem, builders } = detail;
+  const builders = MOCK_BUILDERS.filter((b) =>
+    b.ecosystem.includes(ecosystem.category)
+  ).sort((a, b) => a.rank - b.rank);
 
   return (
     <div className="container max-w-3xl mx-auto px-4 py-10 space-y-8">
