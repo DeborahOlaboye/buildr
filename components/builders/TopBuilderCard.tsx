@@ -50,6 +50,9 @@ export default function TopBuilderCard({
           fill
           className="object-cover"
           unoptimized
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).src = "/fallback-avatar.svg";
+          }}
         />
       </div>
       <div>
