@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { MOCK_BUILDERS, TOTAL_BUILDERS } from "@/lib/mock-data";
 import type { BuildersApiResponse } from "@/types";
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest): Promise<NextResponse<BuildersApiResponse>> {
   const { searchParams } = request.nextUrl;
 
   const search = searchParams.get("search")?.trim().toLowerCase() ?? "";
