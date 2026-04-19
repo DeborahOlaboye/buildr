@@ -38,7 +38,10 @@ export default function EcosystemCategoryTabs({
             className="text-xs px-3 py-1.5 gap-1.5"
           >
             {cat}
-            <span className="rounded-full bg-muted-foreground/10 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums">
+            <span
+              className="rounded-full bg-muted-foreground/10 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums"
+              aria-label={`${counts[cat]} ecosystem${counts[cat] === 1 ? "" : "s"}`}
+            >
               {counts[cat]}
             </span>
           </TabsTrigger>
