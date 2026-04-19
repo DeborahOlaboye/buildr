@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { MOCK_ACTIVITY_FEED } from "@/lib/mock-data";
 import type { ActivityApiResponse } from "@/types";
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest): Promise<NextResponse<ActivityApiResponse>> {
   const { searchParams } = request.nextUrl;
   const limit = Math.min(
     100,
