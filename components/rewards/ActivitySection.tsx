@@ -17,7 +17,7 @@ export default function ActivitySection({ activity }: ActivitySectionProps) {
     <section className="space-y-4">
       {/* Section header */}
       <div className="flex items-center gap-2">
-        <Eye className="h-5 w-5 text-muted-foreground" />
+        <Eye className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
         <h2 className="text-xl font-semibold">View my activity</h2>
       </div>
       <p className="text-sm text-muted-foreground -mt-2">
