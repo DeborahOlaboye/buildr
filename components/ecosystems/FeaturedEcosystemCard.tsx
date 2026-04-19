@@ -52,6 +52,9 @@ export default function FeaturedEcosystemCard({ ecosystem }: FeaturedEcosystemCa
             fill
             className="object-cover"
             unoptimized
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = "/fallback-avatar.svg";
+            }}
           />
         </div>
         <div>
