@@ -13,16 +13,16 @@ const VALID_CATEGORIES: EcosystemCategory[] = [
   "DAO",
 ];
 
-export async function GET(request: NextRequest) {
+function isEcosystemCategory(value: string): value is EcosystemCategory {
+  return VALID_CATEGORIES.includes(value as EcosystemCategory);
+}
+
+export async function GET(request: NextRequest): Promise<NextResponse<EcosystemsApiResponse>> {
   const { searchParams } = request.nextUrl;
 
   const search = searchParams.get("search")?.trim().toLowerCase() ?? "";
   const rawCategory = searchParams.get("category") ?? "All";
-  const category: EcosystemCategory = VALID_CATEGORIES.includes(
-    rawCategory as EcosystemCategory
-  )
-    ? (rawCategory as EcosystemCategory)
-    : "All";
+  const category: EcosystemCategory = isEcosystemCategory(rawCategory) ? rawCategory : "All";
 
   const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10));
   const limit = [10, 25, 50].includes(parseInt(searchParams.get("limit") ?? "25", 10))
