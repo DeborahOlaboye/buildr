@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Separator } from "@/components/ui/separator";
 import BuilderProfileHero from "@/components/builders/BuilderProfileHero";
 import BuilderStatGrid from "@/components/builders/BuilderStatGrid";
@@ -7,6 +8,28 @@ import { MOCK_BUILDERS } from "@/lib/mock-data";
 
 interface BuilderProfilePageProps {
   params: Promise<{ handle: string }>;
+}
+
+export async function generateMetadata({ params }: BuilderProfilePageProps): Promise<Metadata> {
+  const { handle } = await params;
+  const builder = MOCK_BUILDERS.find(
+    (b) => b.handle.toLowerCase() === handle.toLowerCase()
+  );
+
+  if (!builder) {
+    return { title: `Builder @${handle} not found` };
+  }
+
+  return {
+    title: `@${builder.handle} — ${builder.name}`,
+    description: builder.bio ||
+      `View ${builder.name}'s builder profile on Buildr. Rank #${builder.rank} with ${builder.contractsDeployed} contracts deployed.`,
+    openGraph: {
+      title: `${builder.name} (@${builder.handle}) — Buildr`,
+      description: `Stacks builder rank #${builder.rank}. ${builder.contractsDeployed} contracts deployed, ${builder.githubContributions} GitHub contributions.`,
+      type: "profile",
+    },
+  };
 }
 
 export default async function BuilderProfilePage({ params }: BuilderProfilePageProps) {
