@@ -1,6 +1,26 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Zap, Shield, TrendingUp, Globe } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "STX Token",
+  description:
+    "Learn about the STX token — the native currency of Stacks Bitcoin L2. Used for smart contract execution, builder rewards, and network consensus.",
+  keywords: [
+    "STX token",
+    "Stacks token",
+    "Bitcoin L2 token",
+    "Clarity smart contracts",
+    "Proof of Transfer",
+  ],
+  openGraph: {
+    title: "STX Token — Buildr",
+    description:
+      "The STX token powers smart contracts, builder rewards, and Bitcoin-secured consensus on Stacks.",
+    type: "website",
+  },
+};
 
 const STATS = [
   { label: "Total Supply", value: "1.818B STX" },
