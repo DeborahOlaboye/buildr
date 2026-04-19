@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Separator } from "@/components/ui/separator";
 import EcosystemDetailHero from "@/components/ecosystems/EcosystemDetailHero";
 import EcosystemBuildersList from "@/components/ecosystems/EcosystemBuildersList";
@@ -7,6 +8,28 @@ import { MOCK_ECOSYSTEMS, MOCK_BUILDERS } from "@/lib/mock-data";
 
 interface EcosystemDetailPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: EcosystemDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const ecosystem = MOCK_ECOSYSTEMS.find(
+    (e) => e.slug.toLowerCase() === slug.toLowerCase()
+  );
+
+  if (!ecosystem) {
+    return { title: `Ecosystem '${slug}' not found` };
+  }
+
+  return {
+    title: ecosystem.name,
+    description: ecosystem.description ||
+      `Explore ${ecosystem.name} — a ${ecosystem.category} project building on Stacks Bitcoin L2 with ${ecosystem.builderCount} active builders.`,
+    openGraph: {
+      title: `${ecosystem.name} — Stacks Ecosystem on Buildr`,
+      description: `${ecosystem.category} project with ${ecosystem.builderCount} active builders on Stacks.`,
+      type: "website",
+    },
+  };
 }
 
 export default async function EcosystemDetailPage({ params }: EcosystemDetailPageProps) {
