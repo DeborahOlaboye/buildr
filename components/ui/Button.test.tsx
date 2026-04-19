@@ -17,7 +17,7 @@ describe('Button component', () => {
   });
 
   test('asChild renders custom component', () => {
-    const LinkMock = ({children, ...props}: any) => <a {...props}>{children}</a>;
+    const LinkMock = ({ children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => <a {...props}>{children}</a>;
     render(<Button asChild><LinkMock>Link</LinkMock></Button>);
     expect(screen.getByText('Link').tagName).toBe('A');
   });
