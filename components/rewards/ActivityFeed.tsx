@@ -12,7 +12,7 @@ export default function ActivityFeed({ items }: ActivityFeedProps) {
     <section className="space-y-4">
       {/* Header */}
       <div className="flex items-center gap-2">
-        <Activity className="h-5 w-5 text-primary" />
+        <Activity className="h-5 w-5 text-primary" aria-hidden="true" />
         <h2 className="text-lg font-semibold">Live Activity</h2>
         <span className="ml-auto text-xs text-muted-foreground">
           {items.length} recent events
