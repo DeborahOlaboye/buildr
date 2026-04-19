@@ -1,6 +1,14 @@
 import React from "react";
+import type { Metadata } from "next";
 import LegalPageHeader from "@/components/legal/LegalPageHeader";
 import LegalLinksBar from "@/components/legal/LegalLinksBar";
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions",
+  description:
+    "Read the terms and conditions governing use of Buildr — the Stacks builder rewards and ecosystem discovery platform.",
+  robots: { index: true, follow: true },
+};
 
 const LAST_UPDATED = "February 1, 2025";
 
