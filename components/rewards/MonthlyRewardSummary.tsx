@@ -18,7 +18,7 @@ export default function MonthlyRewardSummary({
       {/* Title row */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Trophy className="h-5 w-5 text-primary" />
+          <Trophy className="h-5 w-5 text-primary" aria-hidden="true" />
           <span className="font-semibold text-sm">{programName}</span>
         </div>
         {activity.rewardCompleted && (
