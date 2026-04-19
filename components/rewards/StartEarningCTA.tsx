@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 export default function StartEarningCTA() {
   return (
     <div className="rounded-xl border-2 border-dashed border-primary/20 bg-primary/5 p-6 space-y-4 text-center">
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 mx-auto">
-        <Zap className="h-6 w-6 text-primary" />
+      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 mx-auto" aria-hidden="true">
+        <Zap className="h-6 w-6 text-primary" aria-hidden="true" />
       </div>
 
       <div>
@@ -21,13 +21,13 @@ export default function StartEarningCTA() {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
         <Button size="sm" variant="outline" className="gap-2 w-full sm:w-auto" asChild>
           <Link href="/connect">
-            <Wallet className="h-4 w-4" />
+            <Wallet className="h-4 w-4" aria-hidden="true" />
             Connect Wallet
           </Link>
         </Button>
         <Button size="sm" variant="outline" className="gap-2 w-full sm:w-auto" asChild>
           <Link href="/connect">
-            <Github className="h-4 w-4" />
+            <Github className="h-4 w-4" aria-hidden="true" />
             Connect GitHub
           </Link>
         </Button>
@@ -39,7 +39,7 @@ export default function StartEarningCTA() {
           href="/connect"
           className="text-primary hover:underline inline-flex items-center gap-0.5"
         >
-          View my activity <ArrowRight className="h-3 w-3" />
+          View my activity <ArrowRight className="h-3 w-3" aria-hidden="true" />
         </Link>
       </p>
     </div>
