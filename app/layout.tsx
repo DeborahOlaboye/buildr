@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import JsonLd from "@/components/shared/JsonLd";
 import {
   APP_URL,
   SEO_SITE_NAME,
@@ -14,7 +15,18 @@ import {
   SEO_DEFAULT_DESCRIPTION,
   SEO_DEFAULT_KEYWORDS,
   SEO_OG_IMAGE,
+  SUPPORT_EMAIL,
 } from "@/lib/constants";
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SEO_SITE_NAME,
+  url: APP_URL,
+  description: SEO_DEFAULT_DESCRIPTION,
+  email: SUPPORT_EMAIL,
+  sameAs: ["https://twitter.com/buildrapp", "https://github.com/buildrapp"],
+};
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -70,6 +82,7 @@ export default function RootLayout({
             >
               Skip to main content
             </a>
+            <JsonLd data={organizationSchema} />
             <Suspense>
               <Navbar />
             </Suspense>
