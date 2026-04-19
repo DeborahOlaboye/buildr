@@ -39,33 +39,21 @@ function RankCell({ rank }: { rank: number }) {
   );
 }
 
+type EcosystemVariant = "defi" | "nft" | "gaming" | "dao" | "infrastructure" | "social";
+
+const ECOSYSTEM_VARIANTS = new Map<string, EcosystemVariant>([
+  ["defi", "defi"],
+  ["nft", "nft"],
+  ["gaming", "gaming"],
+  ["dao", "dao"],
+  ["infrastructure", "infrastructure"],
+  ["social", "social"],
+]);
+
 function EcosystemBadge({ tag }: { tag: string }) {
-  const lc = tag.toLowerCase() as
-    | "defi"
-    | "nft"
-    | "gaming"
-    | "dao"
-    | "infrastructure"
-    | "social";
+  const variant = ECOSYSTEM_VARIANTS.get(tag.toLowerCase()) ?? "secondary";
   return (
-    <Badge
-      variant={
-        lc === "defi"
-          ? "defi"
-          : lc === "nft"
-          ? "nft"
-          : lc === "gaming"
-          ? "gaming"
-          : lc === "dao"
-          ? "dao"
-          : lc === "infrastructure"
-          ? "infrastructure"
-          : lc === "social"
-          ? "social"
-          : "secondary"
-      }
-      className="text-[10px] px-1.5 py-0"
-    >
+    <Badge variant={variant} className="text-[10px] px-1.5 py-0">
       {tag}
     </Badge>
   );
