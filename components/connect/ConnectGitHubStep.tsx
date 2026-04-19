@@ -13,8 +13,9 @@ export default function ConnectGitHubStep({ onConnected }: ConnectGitHubStepProp
 
   function handleConnect() {
     const trimmed = handle.trim().replace(/^@/, "");
-    if (!trimmed || trimmed.length < 2) {
-      setError("Please enter a valid GitHub username.");
+    const validHandle = /^[a-zA-Z0-9]([a-zA-Z0-9-]{0,37}[a-zA-Z0-9])?$/.test(trimmed);
+    if (!trimmed || !validHandle) {
+      setError("Please enter a valid GitHub username (letters, numbers, and hyphens only; no leading/trailing hyphens).");
       return;
     }
     setError("");
