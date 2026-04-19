@@ -9,6 +9,7 @@ import TopBuilderCard from "@/components/builders/TopBuilderCard";
 import EmptyState from "@/components/builders/EmptyState";
 import Pagination from "@/components/shared/Pagination";
 import SkeletonRow from "@/components/shared/SkeletonRow";
+import { Button } from "@/components/ui/button";
 import { fetchBuilders } from "@/lib/api-client";
 import type { Builder, SortMode, RowsPerPageOption, BuildersApiResponse } from "@/types";
 
@@ -22,12 +23,16 @@ export default function BuildersPage() {
   const [selectedBuilder, setSelectedBuilder] = useState<Builder | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<BuildersApiResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setIsLoading(true);
+    setError(null);
     try {
       const result = await fetchBuilders({ search, sort, page, limit: rowsPerPage });
       setData(result);
+    } catch {
+      setError("Failed to load builders. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -98,7 +103,12 @@ export default function BuildersPage() {
       <BuilderCount count={total} filtered={!!search.trim()} />
 
       {/* Table or Empty State */}
-      {isLoading ? (
+      {error ? (
+        <div className="flex flex-col items-center gap-3 py-10 text-center" role="alert">
+          <p className="text-sm text-destructive font-medium">{error}</p>
+          <Button variant="outline" size="sm" onClick={load}>Try again</Button>
+        </div>
+      ) : isLoading ? (
         <div className="rounded-xl border overflow-hidden">
           <table className="w-full">
             <tbody>
