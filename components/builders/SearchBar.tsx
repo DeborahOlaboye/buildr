@@ -20,8 +20,8 @@ export default function SearchBar({
   const [localValue, setLocalValue] = useState(value);
 
   const debouncedOnChange = useRef(
-    debounce((val: unknown) => {
-      onChange(val as string);
+    debounce((val: string) => {
+      onChange(val);
     }, 300)
   ).current;
 
