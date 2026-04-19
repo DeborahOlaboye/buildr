@@ -130,6 +130,12 @@ export default function BuildersPage() {
       {selectedBuilder && (
         <span className="hidden" data-selected={selectedBuilder.id} />
       )}
+
+      <span className="sr-only" aria-live="polite" aria-atomic="true">
+        {isLoading
+          ? "Loading builders"
+          : `${total} builder${total !== 1 ? "s" : ""} loaded`}
+      </span>
     </div>
   );
 }
