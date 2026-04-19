@@ -23,8 +23,8 @@ export default function MonthlyRewardSummary({
         </div>
         {activity.rewardCompleted && (
           <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-semibold text-green-700 dark:bg-green-900/40 dark:text-green-300">
-            <CheckCircle2 className="h-3 w-3" />
-            Completed
+            <CheckCircle2 className="h-3 w-3" aria-hidden="true" />
+            <span>Completed</span>
           </span>
         )}
       </div>
