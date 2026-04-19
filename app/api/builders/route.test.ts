@@ -1,5 +1,6 @@
 import { GET } from './route';
 import { NextRequest } from 'next/server';
+import type { Builder } from '@/types';
 
 describe('builders API route', () => {
   test('returns paginated builders default', async () => {
@@ -14,7 +15,7 @@ describe('builders API route', () => {
     const req = new NextRequest('http://localhost/api/builders?search=alice');
     const res = await GET(req);
     const data = await res.json();
-    expect(data.builders.every((b: any) =>
+    expect(data.builders.every((b: Builder) =>
       b.name.toLowerCase().includes('alice') ||
       b.handle.toLowerCase().includes('alice'))).toBe(true);
   });
