@@ -7,7 +7,7 @@ interface RouteContext {
   params: Promise<{ handle: string }>;
 }
 
-export async function GET(_request: NextRequest, { params }: RouteContext) {
+export async function GET(_request: NextRequest, { params }: RouteContext): Promise<NextResponse> {
   const { handle } = await params;
 
   const builder = MOCK_BUILDERS.find(
