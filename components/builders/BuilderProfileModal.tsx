@@ -98,9 +98,13 @@ export default function BuilderProfileModal({
         {/* Ecosystem tags */}
         <div className="flex flex-wrap gap-1.5">
           {builder.ecosystem.map((tag) => {
-            const lc = tag.toLowerCase() as Parameters<typeof Badge>[0]["variant"];
+            const lc = tag.toLowerCase();
+            const KNOWN_VARIANTS = new Set(["defi", "nft", "gaming", "dao", "infrastructure", "social"]);
+            const variant = KNOWN_VARIANTS.has(lc)
+              ? (lc as "defi" | "nft" | "gaming" | "dao" | "infrastructure" | "social")
+              : "secondary";
             return (
-              <Badge key={tag} variant={lc} className="text-xs">
+              <Badge key={tag} variant={variant} className="text-xs">
                 {tag}
               </Badge>
             );
