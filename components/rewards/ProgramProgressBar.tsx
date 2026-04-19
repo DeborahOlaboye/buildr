@@ -34,13 +34,16 @@ export default function ProgramProgressBar({ program }: ProgramProgressBarProps)
         </span>
         <span>{new Date(program.endDate).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
       </div>
+      <p className="sr-only">
+        {`Program is ${progress}% complete.${daysLeft > 0 ? ` ${daysLeft} days remaining.` : " Program has ended."}`}
+      </p>
       <div
         className="h-2 w-full rounded-full bg-muted overflow-hidden"
         role="progressbar"
         aria-valuenow={progress}
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-label={`Program progress: ${progress}% complete${daysLeft > 0 ? `, ${daysLeft} days remaining` : ", program ended"}`}
+        aria-label={`Program progress: ${progress}%`}
       >
         <div
           className="h-full rounded-full bg-primary transition-all duration-500"
