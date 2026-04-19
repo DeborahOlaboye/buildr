@@ -14,8 +14,8 @@ export default function ConnectWalletStep({ onConnected }: ConnectWalletStepProp
 
   function handleConnect() {
     const trimmed = address.trim();
-    if (!trimmed.startsWith("SP") || trimmed.length < 20) {
-      setError("Please enter a valid Stacks wallet address (starts with SP…).");
+    if (!trimmed.startsWith("SP") || trimmed.length < 40 || trimmed.length > 42) {
+      setError("Please enter a valid Stacks wallet address (starts with SP, 40–42 characters).");
       return;
     }
     setError("");

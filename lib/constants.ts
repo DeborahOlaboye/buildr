@@ -48,3 +48,27 @@ export const CACHE_TTL_BUILDERS = 60;        // 1 minute
 export const CACHE_TTL_ECOSYSTEMS = 300;     // 5 minutes
 export const CACHE_TTL_REWARDS = 3600;       // 1 hour
 export const CACHE_TTL_ACTIVITY = 30;        // 30 seconds
+
+// ─── Smart Contract Names ─────────────────────────────────────────────────────
+
+export const CONTRACT_BUILDR_REGISTRY = "buildr-registry";
+export const CONTRACT_BUILDER_SCORES  = "builder-scores";
+export const CONTRACT_REWARD_PROGRAM  = "reward-program";
+export const CONTRACT_SUBSCRIPTION    = "subscription";
+
+// ─── Contract Score Weights ───────────────────────────────────────────────────
+
+export const SCORE_WEIGHT_ONCHAIN = 60;
+export const SCORE_WEIGHT_GITHUB  = 40;
+
+// ─── Subscription Tiers ───────────────────────────────────────────────────────
+
+export const SUBSCRIPTION_TIER_FREE       = 0;
+export const SUBSCRIPTION_TIER_PRO        = 1;
+export const SUBSCRIPTION_TIER_ENTERPRISE = 2;
+
+export const SUBSCRIPTION_CYCLE_MONTHLY = 0;
+export const SUBSCRIPTION_CYCLE_ANNUAL  = 1;
+
+export const PRICE_PRO_MONTHLY_USTX = 10_000_000;   // 10 STX
+export const PRICE_PRO_ANNUAL_USTX  = 96_000_000;   // 96 STX

@@ -1,12 +1,5 @@
 import React from "react";
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  other: {
-    "talentapp:project_verification":
-      "3c7a971c1139d65b2ffe91b1c1d1ad3d686c14932151307db82526caf13ce1e6eb49561207afdbdd15c66d847a3b45ad8a742e4f18d256213f1009bc14477887",
-  },
-};
 import RewardsBanner from "@/components/rewards/RewardsBanner";
 import ActivitySection from "@/components/rewards/ActivitySection";
 import MonthlyRewardSummary from "@/components/rewards/MonthlyRewardSummary";
@@ -21,6 +14,13 @@ import {
   FAQ_ITEMS,
   MOCK_ACTIVITY_FEED,
 } from "@/lib/mock-data";
+
+export const metadata: Metadata = {
+  other: {
+    "talentapp:project_verification":
+      "3c7a971c1139d65b2ffe91b1c1d1ad3d686c14932151307db82526caf13ce1e6eb49561207afdbdd15c66d847a3b45ad8a742e4f18d256213f1009bc14477887",
+  },
+};
 
 const IS_USER_CONNECTED =
   MOCK_USER_ACTIVITY.wallet.status === "connected" &&

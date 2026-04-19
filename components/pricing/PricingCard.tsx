@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { SUPPORT_EMAIL } from "@/lib/constants";
 import type { BillingCycle, PricingTier } from "@/types";
 
 interface PricingCardProps {
@@ -89,7 +90,7 @@ export default function PricingCard({ tier, billing }: PricingCardProps) {
           asChild={tier.id === "enterprise"}
         >
           {tier.id === "enterprise" ? (
-            <a href="mailto:hello@buildr.xyz">{tier.ctaLabel}</a>
+            <a href={`mailto:${SUPPORT_EMAIL}`} aria-label={`Contact us at ${SUPPORT_EMAIL}`}>{tier.ctaLabel}</a>
           ) : (
             <span>{tier.ctaLabel}</span>
           )}
