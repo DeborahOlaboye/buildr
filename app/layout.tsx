@@ -5,22 +5,51 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import {
+  APP_URL,
+  SEO_SITE_NAME,
+  SEO_LOCALE,
+  SEO_TWITTER_HANDLE,
+  SEO_DEFAULT_TITLE,
+  SEO_DEFAULT_DESCRIPTION,
+  SEO_DEFAULT_KEYWORDS,
+  SEO_OG_IMAGE,
+} from "@/lib/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(APP_URL),
   title: {
-    default: "Buildr — Stacks Builder Rewards",
-    template: "%s | Buildr",
+    default: SEO_DEFAULT_TITLE,
+    template: `%s | ${SEO_SITE_NAME}`,
   },
-  description:
-    "Track onchain activity and GitHub contributions on Stacks. Earn $STX rewards as a top Bitcoin L2 builder.",
-  keywords: ["Stacks", "Bitcoin L2", "builder rewards", "STX", "Clarity", "smart contracts"],
+  description: SEO_DEFAULT_DESCRIPTION,
+  keywords: SEO_DEFAULT_KEYWORDS,
   openGraph: {
-    title: "Buildr — Stacks Builder Rewards",
+    title: SEO_DEFAULT_TITLE,
     description:
       "Earn $STX rewards by building on Stacks. Connect your Bitcoin L2 wallet and GitHub to get ranked.",
     type: "website",
+    url: APP_URL,
+    siteName: SEO_SITE_NAME,
+    locale: SEO_LOCALE,
+    images: [
+      {
+        url: SEO_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: `${SEO_SITE_NAME} — Stacks Builder Rewards`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: SEO_TWITTER_HANDLE,
+    creator: SEO_TWITTER_HANDLE,
+    title: SEO_DEFAULT_TITLE,
+    description: SEO_DEFAULT_DESCRIPTION,
+    images: [SEO_OG_IMAGE],
   },
 };
 
