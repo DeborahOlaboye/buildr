@@ -31,7 +31,7 @@ export default function FeaturedEcosystemCard({ ecosystem }: FeaturedEcosystemCa
   return (
     <div
       role="article"
-      aria-label={`${ecosystem.name} (Featured)`}
+      aria-labelledby={`featured-ecosystem-${ecosystem.id}`}
       className={cn(
         "relative rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-5 flex flex-col gap-4",
         "hover:border-primary/40 hover:shadow-lg transition-all duration-200"
@@ -52,11 +52,14 @@ export default function FeaturedEcosystemCard({ ecosystem }: FeaturedEcosystemCa
             fill
             className="object-cover"
             unoptimized
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = "/fallback-avatar.svg";
+            }}
           />
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="font-bold text-base">{ecosystem.name}</h3>
+            <h3 id={`featured-ecosystem-${ecosystem.id}`} className="font-bold text-base">{ecosystem.name}</h3>
             {ecosystem.isVerified && (
               <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
             )}

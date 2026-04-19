@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { PRICING_TIERS, PRICING_FEATURES, PRICING_FAQ } from "@/lib/mock-data";
 import type { PricingApiResponse } from "@/types";
 
-export async function GET() {
+export async function GET(): Promise<NextResponse<PricingApiResponse>> {
   const body: PricingApiResponse = {
     tiers: PRICING_TIERS,
     features: PRICING_FEATURES,

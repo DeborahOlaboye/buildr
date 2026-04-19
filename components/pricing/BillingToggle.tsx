@@ -48,7 +48,11 @@ export default function BillingToggle({
             Annual
           </span>
           {isAnnual && (
-            <Badge variant="default" className="text-[10px] px-1.5 py-0.5 bg-green-500 hover:bg-green-500 text-white">
+            <Badge
+              variant="default"
+              className="text-[10px] px-1.5 py-0.5 bg-green-500 hover:bg-green-500 text-white"
+              aria-label={`Save ${discountPercent}% with annual billing`}
+            >
               Save {discountPercent}%
             </Badge>
           )}

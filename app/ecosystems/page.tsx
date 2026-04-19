@@ -7,6 +7,7 @@ import EcosystemSearchBar from "@/components/ecosystems/EcosystemSearchBar";
 import EcosystemCategoryTabs from "@/components/ecosystems/EcosystemCategoryTabs";
 import EcosystemGrid from "@/components/ecosystems/EcosystemGrid";
 import SkeletonCard from "@/components/shared/SkeletonCard";
+import ErrorMessage from "@/components/shared/ErrorMessage";
 import { fetchEcosystems } from "@/lib/api-client";
 import type { EcosystemCategory, EcosystemsApiResponse } from "@/types";
 
@@ -15,12 +16,16 @@ export default function EcosystemsPage() {
   const [category, setCategory] = useState<EcosystemCategory>("All");
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<EcosystemsApiResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setIsLoading(true);
+    setError(null);
     try {
       const result = await fetchEcosystems({ search, category, limit: 50 });
       setData(result);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Failed to load ecosystems.");
     } finally {
       setIsLoading(false);
     }
@@ -55,7 +60,6 @@ export default function EcosystemsPage() {
 
   return (
     <div className="container py-8 space-y-8">
-      {/* Page Header */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Ecosystems</h1>
         <p className="text-muted-foreground mt-1">
@@ -63,15 +67,12 @@ export default function EcosystemsPage() {
         </p>
       </div>
 
-      {/* Stats bar */}
       <EcosystemStatsBar stats={stats} />
 
-      {/* Spotlight / Featured */}
       {!search.trim() && category === "All" && featured.length > 0 && (
         <FeaturedSection ecosystems={featured} />
       )}
 
-      {/* Filters row */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <EcosystemCategoryTabs
           value={category}
@@ -83,7 +84,6 @@ export default function EcosystemsPage() {
         </div>
       </div>
 
-      {/* Result count */}
       {(search.trim() || category !== "All") && (
         <p className="text-sm text-muted-foreground -mt-2">
           <span className="font-semibold text-foreground">{total}</span>{" "}
@@ -91,13 +91,14 @@ export default function EcosystemsPage() {
         </p>
       )}
 
-      {/* Grid */}
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {Array.from({ length: 6 }).map((_, i) => (
             <SkeletonCard key={i} lines={3} showAvatar />
           ))}
         </div>
+      ) : error ? (
+        <ErrorMessage message={error} onRetry={load} />
       ) : (
         <EcosystemGrid
           ecosystems={ecosystems}

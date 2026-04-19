@@ -29,7 +29,10 @@ export default function LeaderboardTable({
   return (
     <>
       <div className="w-full overflow-x-auto rounded-lg border">
-        <table className="w-full text-left" aria-label="Builder leaderboard">
+        <table className="w-full text-left">
+          <caption className="sr-only">
+            Builder leaderboard — ranked by {sortMode === "monthly" ? "monthly" : "all-time"} STX rewards
+          </caption>
           <thead>
             <tr className="border-b bg-muted/50">
               <th scope="col" className="py-3 pl-4 pr-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide w-12">

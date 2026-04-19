@@ -17,9 +17,8 @@ function formatDateRange(start: string, end: string): string {
 export default function RewardsBanner({ program }: RewardsBannerProps) {
   return (
     <div className="relative overflow-hidden rounded-2xl border bg-gradient-to-br from-orange-50 to-purple-50 dark:from-orange-950/30 dark:to-purple-950/30 p-6 sm:p-8">
-      {/* Decorative blobs */}
-      <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-orange-400/10 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-purple-500/10 blur-3xl pointer-events-none" />
+      <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-orange-400/10 blur-3xl pointer-events-none" aria-hidden="true" />
+      <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-purple-500/10 blur-3xl pointer-events-none" aria-hidden="true" />
 
       <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         {/* Left: title + meta */}

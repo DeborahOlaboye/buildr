@@ -245,3 +245,8 @@ export interface RewardsApiResponse {
   totalBuilders: number;
   faqItems: FAQItem[];
 }
+
+export interface EcosystemDetailApiResponse {
+  ecosystem: Ecosystem;
+  builders: Builder[];
+}

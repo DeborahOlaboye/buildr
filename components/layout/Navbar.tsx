@@ -53,10 +53,13 @@ export default function Navbar() {
       if (e.key === "Escape" && searchOpen) {
         setSearchOpen(false);
       }
+      if (e.key === "Escape" && mobileOpen) {
+        setMobileOpen(false);
+      }
     }
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [searchOpen]);
+  }, [searchOpen, mobileOpen]);
 
   function handleDesktopSubmit(e: React.FormEvent) {
     e.preventDefault();

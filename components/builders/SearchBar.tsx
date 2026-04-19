@@ -20,8 +20,8 @@ export default function SearchBar({
   const [localValue, setLocalValue] = useState(value);
 
   const debouncedOnChange = useRef(
-    debounce((val: unknown) => {
-      onChange(val as string);
+    debounce((val: string) => {
+      onChange(val);
     }, 300)
   ).current;
 
@@ -41,15 +41,15 @@ export default function SearchBar({
   }
 
   return (
-    <div className="relative w-full">
+    <search aria-label="Builders search" className="relative w-full">
       <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" aria-hidden="true" />
       <Input
+        type="search"
         value={localValue}
         onChange={handleChange}
         placeholder={placeholder}
         className="pl-9 pr-9"
         aria-label={placeholder}
-        role="searchbox"
       />
       {localValue && (
         <Button
@@ -62,6 +62,6 @@ export default function SearchBar({
           <X className="h-3.5 w-3.5 text-muted-foreground" />
         </Button>
       )}
-    </div>
+    </search>
   );
 }
