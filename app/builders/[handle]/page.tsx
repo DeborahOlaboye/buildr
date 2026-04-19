@@ -29,6 +29,9 @@ export async function generateMetadata({ params }: BuilderProfilePageProps): Pro
       description: `Stacks builder rank #${builder.rank}. ${builder.contractsDeployed} contracts deployed, ${builder.githubContributions} GitHub contributions.`,
       type: "profile",
     },
+    alternates: {
+      canonical: `/builders/${builder.handle}`,
+    },
   };
 }
 
