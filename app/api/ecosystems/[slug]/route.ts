@@ -12,7 +12,7 @@ interface RouteContext {
   params: Promise<{ slug: string }>;
 }
 
-export async function GET(_request: NextRequest, { params }: RouteContext) {
+export async function GET(_request: NextRequest, { params }: RouteContext): Promise<NextResponse> {
   const { slug } = await params;
 
   const ecosystem = MOCK_ECOSYSTEMS.find(
