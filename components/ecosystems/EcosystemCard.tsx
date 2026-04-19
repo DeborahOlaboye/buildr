@@ -29,7 +29,7 @@ export default function EcosystemCard({ ecosystem }: EcosystemCardProps) {
   const variant = CATEGORY_VARIANT[ecosystem.category] ?? "secondary";
 
   return (
-    <Card className="group flex flex-col h-full hover:shadow-md transition-all duration-200 hover:-translate-y-0.5" role="article" aria-label={ecosystem.name}>
+    <Card className="group flex flex-col h-full hover:shadow-md transition-all duration-200 hover:-translate-y-0.5" role="article" aria-labelledby={`ecosystem-${ecosystem.id}`}>
       <CardContent className="flex flex-col gap-3 p-5 flex-1">
         {/* Logo + name row */}
         <div className="flex items-center gap-3">
@@ -44,7 +44,7 @@ export default function EcosystemCard({ ecosystem }: EcosystemCardProps) {
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="font-semibold text-sm truncate">{ecosystem.name}</span>
+              <span id={`ecosystem-${ecosystem.id}`} className="font-semibold text-sm truncate">{ecosystem.name}</span>
               {ecosystem.isVerified && (
                 <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" aria-hidden="true" />
               )}
