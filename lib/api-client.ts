@@ -27,9 +27,9 @@ async function apiFetch<T>(path: string): Promise<T> {
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error(body.error ?? `API error ${res.status}`);
+    throw new Error((body as { error?: string }).error ?? `API error ${res.status}`);
   }
-  return res.json() as Promise<T>;
+  return (await res.json()) as T;
 }
 
 // ─── Builders ────────────────────────────────────────────────────────────────
