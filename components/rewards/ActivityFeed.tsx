@@ -20,13 +20,19 @@ export default function ActivityFeed({ items }: ActivityFeedProps) {
       </div>
 
       {/* Feed list */}
-      <div className="rounded-xl border bg-card divide-y">
-        {items.map((item) => (
-          <div key={item.id} className="px-4">
-            <ActivityFeedItemComponent item={item} />
-          </div>
-        ))}
-      </div>
+      {items.length === 0 ? (
+        <div className="rounded-xl border bg-card px-4 py-8 text-center text-sm text-muted-foreground">
+          No recent activity to display.
+        </div>
+      ) : (
+        <div className="rounded-xl border bg-card divide-y" role="feed" aria-label="Live activity feed">
+          {items.map((item) => (
+            <div key={item.id} className="px-4">
+              <ActivityFeedItemComponent item={item} />
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
