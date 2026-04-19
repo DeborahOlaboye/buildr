@@ -9,6 +9,7 @@ import type {
   BuildersApiResponse,
   BuilderApiResponse,
   EcosystemsApiResponse,
+  EcosystemDetailApiResponse,
   RewardsApiResponse,
   ActivityApiResponse,
   PricingApiResponse,
@@ -74,8 +75,8 @@ export function fetchEcosystems(params: FetchEcosystemsParams = {}): Promise<Eco
   return apiFetch<EcosystemsApiResponse>(`/api/ecosystems${qs ? `?${qs}` : ""}`);
 }
 
-export function fetchEcosystem(slug: string): Promise<{ ecosystem: import("@/types").Ecosystem; builders: import("@/types").Builder[] }> {
-  return apiFetch(`/api/ecosystems/${encodeURIComponent(slug)}`);
+export function fetchEcosystem(slug: string): Promise<EcosystemDetailApiResponse> {
+  return apiFetch<EcosystemDetailApiResponse>(`/api/ecosystems/${encodeURIComponent(slug)}`);
 }
 
 // ─── Rewards ─────────────────────────────────────────────────────────────────
