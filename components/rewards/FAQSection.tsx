@@ -16,7 +16,7 @@ export default function FAQSection({ items }: FAQSectionProps) {
   return (
     <section className="space-y-4">
       <div className="flex items-center gap-2">
-        <HelpCircle className="h-5 w-5 text-muted-foreground" />
+        <HelpCircle className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
         <h2 className="text-xl font-semibold">Frequently Asked Questions</h2>
       </div>
 

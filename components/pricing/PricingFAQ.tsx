@@ -16,7 +16,7 @@ export default function PricingFAQ({ items }: PricingFAQProps) {
   return (
     <section className="space-y-4 max-w-2xl mx-auto">
       <div className="flex items-center justify-center gap-2 text-center">
-        <HelpCircle className="h-5 w-5 text-muted-foreground" />
+        <HelpCircle className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
         <h2 className="text-xl font-semibold">Billing & Membership FAQ</h2>
       </div>
 
