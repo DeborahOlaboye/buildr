@@ -2,6 +2,22 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  title: "Rewards — Buildr",
+  description:
+    "Track your Stacks builder score, earn $STX monthly rewards, and compete on the builder leaderboard.",
+  keywords: [
+    "Stacks rewards",
+    "STX builder rewards",
+    "Bitcoin L2 developer",
+    "Clarity smart contract rewards",
+    "Stacks leaderboard",
+  ],
+  openGraph: {
+    title: "Buildr — Earn $STX Rewards for Building on Stacks",
+    description:
+      "Connect your wallet and GitHub to track your Stacks activity and earn monthly $STX rewards.",
+    type: "website",
+  },
   other: {
     "talentapp:project_verification":
       "3c7a971c1139d65b2ffe91b1c1d1ad3d686c14932151307db82526caf13ce1e6eb49561207afdbdd15c66d847a3b45ad8a742e4f18d256213f1009bc14477887",
