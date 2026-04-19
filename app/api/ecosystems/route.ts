@@ -1,7 +1,7 @@
 export const runtime = 'edge';
 import { NextRequest, NextResponse } from "next/server";
 import { MOCK_ECOSYSTEMS, ECOSYSTEM_STATS } from "@/lib/mock-data";
-import type { EcosystemCategory, EcosystemsApiResponse } from "@/types";
+import type { EcosystemCategory, EcosystemsApiResponse, RowsPerPageOption } from "@/types";
 
 const VALID_CATEGORIES: EcosystemCategory[] = [
   "All",
@@ -13,8 +13,14 @@ const VALID_CATEGORIES: EcosystemCategory[] = [
   "DAO",
 ];
 
+const VALID_LIMITS: RowsPerPageOption[] = [10, 25, 50];
+
 function isEcosystemCategory(value: string): value is EcosystemCategory {
   return VALID_CATEGORIES.includes(value as EcosystemCategory);
+}
+
+function isRowsPerPageOption(value: number): value is RowsPerPageOption {
+  return VALID_LIMITS.includes(value as RowsPerPageOption);
 }
 
 export async function GET(request: NextRequest): Promise<NextResponse<EcosystemsApiResponse>> {
@@ -25,9 +31,8 @@ export async function GET(request: NextRequest): Promise<NextResponse<Ecosystems
   const category: EcosystemCategory = isEcosystemCategory(rawCategory) ? rawCategory : "All";
 
   const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10));
-  const limit = [10, 25, 50].includes(parseInt(searchParams.get("limit") ?? "25", 10))
-    ? parseInt(searchParams.get("limit") ?? "25", 10)
-    : 25;
+  const parsedLimit = parseInt(searchParams.get("limit") ?? "25", 10);
+  const limit: RowsPerPageOption = isRowsPerPageOption(parsedLimit) ? parsedLimit : 25;
 
   // Filter
   const filtered = MOCK_ECOSYSTEMS.filter((e) => {
