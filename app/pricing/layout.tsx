@@ -19,6 +19,12 @@ export const metadata: Metadata = {
       "Unlock exclusive STX reward programs, verified builder badges, and deep analytics. Choose Free, Stacks+, or Enterprise.",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Stacks+ Membership Pricing — Buildr",
+    description:
+      "Unlock exclusive STX rewards and analytics. Choose Free, Pro, or Enterprise.",
+  },
 };
 
 export default function PricingLayout({
