@@ -30,7 +30,7 @@ export default function EcosystemCategoryTabs({
       value={value}
       onValueChange={(v) => onChange(v as EcosystemCategory)}
     >
-      <TabsList className="h-auto flex-wrap gap-1 p-1 w-full sm:w-auto">
+      <TabsList className="h-auto flex-wrap gap-1 p-1 w-full sm:w-auto" aria-label="Filter by ecosystem category">
         {CATEGORIES.map((cat) => (
           <TabsTrigger
             key={cat}
