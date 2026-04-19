@@ -1,18 +1,13 @@
 export const runtime = 'edge';
 import { NextRequest, NextResponse } from "next/server";
 import { MOCK_ECOSYSTEMS, MOCK_BUILDERS } from "@/lib/mock-data";
-import type { Ecosystem, Builder } from "@/types";
-
-interface EcosystemDetailApiResponse {
-  ecosystem: Ecosystem;
-  builders: Builder[];
-}
+import type { EcosystemDetailApiResponse } from "@/types";
 
 interface RouteContext {
   params: Promise<{ slug: string }>;
 }
 
-export async function GET(_request: NextRequest, { params }: RouteContext) {
+export async function GET(_request: NextRequest, { params }: RouteContext): Promise<NextResponse<EcosystemDetailApiResponse | { error: string }>> {
   const { slug } = await params;
 
   const ecosystem = MOCK_ECOSYSTEMS.find(

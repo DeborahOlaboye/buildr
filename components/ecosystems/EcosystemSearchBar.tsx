@@ -15,7 +15,7 @@ export default function EcosystemSearchBar({ value, onChange }: EcosystemSearchB
   const [local, setLocal] = useState(value);
 
   const debouncedChange = useRef(
-    debounce((v: unknown) => onChange(v as string), 300)
+    debounce((v: string) => onChange(v), 300)
   ).current;
 
   useEffect(() => { setLocal(value); }, [value]);

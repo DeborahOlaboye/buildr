@@ -1,10 +1,13 @@
 import React from 'react';
+import type { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import Navbar from './Navbar';
 
 jest.mock('next/link', () => {
-  return ({ children, href }: any) => <a href={href}>{children}</a>;
+  return ({ children, href }: { children: ReactNode; href: string }) => (
+    <a href={href}>{children}</a>
+  );
 });
 
 describe('Navbar component', () => {
