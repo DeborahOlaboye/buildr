@@ -109,6 +109,11 @@ export default function SearchPage() {
         <Button type="submit" size="sm">Search</Button>
       </form>
 
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {!isLoading && !searchError && results && `Found ${results.total} result${results.total === 1 ? "" : "s"} for ${query}`}
+        {!isLoading && searchError && `Search error: ${searchError}`}
+      </div>
+
       <SearchResultsHeader
         query={query}
         total={results?.total ?? 0}
