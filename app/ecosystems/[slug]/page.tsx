@@ -29,6 +29,9 @@ export async function generateMetadata({ params }: EcosystemDetailPageProps): Pr
       description: `${ecosystem.category} project with ${ecosystem.builderCount} active builders on Stacks.`,
       type: "website",
     },
+    alternates: {
+      canonical: `/ecosystems/${ecosystem.slug}`,
+    },
   };
 }
 
