@@ -18,7 +18,7 @@ import { formatSTX } from "@/lib/utils";
 import { fetchBuilders } from "@/lib/api-client";
 import type { Builder, RowsPerPageOption, BuildersApiResponse } from "@/types";
 
-const ROWS_PER_PAGE: RowsPerPageOption = 10;
+const DEFAULT_ROWS_PER_PAGE: RowsPerPageOption = 10;
 
 const FALLBACK_AVATAR = "/fallback-avatar.svg";
 
@@ -60,7 +60,7 @@ function RankBadge({ rank }: { rank: number }) {
 function LeaderboardSkeleton() {
   return (
     <div className="rounded-lg border overflow-hidden" aria-busy="true" aria-label="Loading leaderboard">
-      {Array.from({ length: ROWS_PER_PAGE }).map((_, i) => (
+      {Array.from({ length: DEFAULT_ROWS_PER_PAGE }).map((_, i) => (
         <div key={i} className="flex items-center gap-3 px-4 py-3 border-b last:border-b-0 animate-pulse">
           <div className="h-6 w-6 rounded-full bg-muted" />
           <div className="h-8 w-8 rounded-full bg-muted" />
@@ -85,6 +85,7 @@ function EmptyLeaderboard() {
 
 export default function RewardsLeaderboard() {
   const [page, setPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState<RowsPerPageOption>(DEFAULT_ROWS_PER_PAGE);
   const [selectedBuilder, setSelectedBuilder] = useState<Builder | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [data, setData] = useState<BuildersApiResponse | null>(null);
@@ -94,7 +95,7 @@ export default function RewardsLeaderboard() {
   const load = useCallback(() => {
     setIsLoading(true);
     setError(null);
-    fetchBuilders({ sort: "monthly", page, limit: ROWS_PER_PAGE })
+    fetchBuilders({ sort: "monthly", page, limit: rowsPerPage })
       .then((res) => {
         setData(res);
         setIsLoading(false);
@@ -103,7 +104,7 @@ export default function RewardsLeaderboard() {
         setError(err instanceof Error ? err.message : "Failed to load leaderboard.");
         setIsLoading(false);
       });
-  }, [page]);
+  }, [page, rowsPerPage]);
 
   useEffect(() => {
     load();
@@ -213,10 +214,13 @@ export default function RewardsLeaderboard() {
       {!isLoading && !error && builders.length > 0 && (
         <Pagination
           currentPage={page}
-          rowsPerPage={ROWS_PER_PAGE}
+          rowsPerPage={rowsPerPage}
           totalItems={total}
           onPageChange={setPage}
-          onRowsPerPageChange={() => {}}
+          onRowsPerPageChange={(rows) => {
+            setRowsPerPage(rows);
+            setPage(1);
+          }}
         />
       )}
 
