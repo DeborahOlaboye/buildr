@@ -106,6 +106,12 @@ export default function EcosystemsPage() {
           onClear={handleClear}
         />
       )}
+
+      <span className="sr-only" aria-live="polite" aria-atomic="true">
+        {isLoading
+          ? "Loading ecosystems"
+          : `${total} ecosystem${total !== 1 ? "s" : ""} loaded`}
+      </span>
     </div>
   );
 }
