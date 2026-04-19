@@ -13,6 +13,25 @@ export const SUPPORT_EMAIL = "support@buildr.app";
 export const LEGAL_EMAIL = "legal@buildr.app";
 export const PRIVACY_EMAIL = "privacy@buildr.app";
 
+// ─── SEO ─────────────────────────────────────────────────────────────────────
+
+export const SEO_SITE_NAME = "Buildr";
+export const SEO_LOCALE = "en_US";
+export const SEO_TWITTER_HANDLE = "@buildrapp";
+export const SEO_DEFAULT_TITLE = "Buildr — Stacks Builder Rewards";
+export const SEO_DEFAULT_DESCRIPTION =
+  "Track onchain activity and GitHub contributions on Stacks. Earn $STX rewards as a top Bitcoin L2 builder.";
+export const SEO_DEFAULT_KEYWORDS = [
+  "Stacks",
+  "Bitcoin L2",
+  "builder rewards",
+  "STX",
+  "Clarity",
+  "smart contracts",
+  "blockchain",
+];
+export const SEO_OG_IMAGE = `${APP_URL}/og-image.png`;
+
 // ─── Stacks ───────────────────────────────────────────────────────────────────
 
 export const STACKS_WALLET_PREFIX = "SP";

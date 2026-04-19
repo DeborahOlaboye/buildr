@@ -1,6 +1,25 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Calendar, Clock } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Read the latest updates, guides, and announcements from Buildr — the Stacks builder rewards platform.",
+  keywords: [
+    "Stacks blog",
+    "Bitcoin L2 builders",
+    "builder rewards news",
+    "Clarity development",
+  ],
+  openGraph: {
+    title: "Buildr Blog — Stacks Builder Updates",
+    description:
+      "Latest news, guides, and announcements from the Buildr team.",
+    type: "website",
+  },
+};
 
 const POSTS = [
   {

@@ -1,7 +1,26 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+
+export const metadata: Metadata = {
+  title: "API Docs",
+  description:
+    "Explore Buildr's REST API for accessing Stacks builder scores, leaderboards, ecosystems, and reward program data.",
+  keywords: [
+    "Buildr API",
+    "Stacks REST API",
+    "builder rewards API",
+    "blockchain API",
+  ],
+  openGraph: {
+    title: "Buildr API Documentation",
+    description:
+      "Access Stacks builder scores, leaderboards, and reward program data via Buildr's REST API.",
+    type: "website",
+  },
+};
 
 interface Endpoint {
   method: "GET" | "POST";

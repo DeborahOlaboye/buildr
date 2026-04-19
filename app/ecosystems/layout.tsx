@@ -10,7 +10,21 @@ export const metadata: Metadata = {
     "Stacks DeFi",
     "Stacks NFT",
     "Clarity protocols",
+    "Stacks DAO",
+    "Stacks Gaming",
   ],
+  openGraph: {
+    title: "Stacks Ecosystems — Buildr",
+    description:
+      "Explore DeFi, NFT, Gaming, Infrastructure, Social, and DAO projects building on Stacks Bitcoin L2.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Stacks Ecosystems — Buildr",
+    description:
+      "Explore projects and protocols building on Stacks Bitcoin L2.",
+  },
 };
 
 export default function EcosystemsLayout({
