@@ -14,10 +14,14 @@ export default function ConnectCompleteState({
   githubHandle,
 }: ConnectCompleteStateProps) {
   return (
-    <div className="rounded-2xl border bg-card p-8 text-center space-y-6">
-      {/* Icon */}
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mx-auto">
-        <PartyPopper className="h-8 w-8 text-primary" />
+    <div
+      role="status"
+      aria-live="polite"
+      aria-label="Connection complete"
+      className="rounded-2xl border bg-card p-8 text-center space-y-6"
+    >
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mx-auto" aria-hidden="true">
+        <PartyPopper className="h-8 w-8 text-primary" aria-hidden="true" />
       </div>
 
       {/* Message */}
@@ -44,9 +48,9 @@ export default function ConnectCompleteState({
       {/* CTA */}
       <Button className="gap-2 mx-auto" asChild>
         <Link href="/">
-          <Zap className="h-4 w-4" />
+          <Zap className="h-4 w-4" aria-hidden="true" />
           Go to Rewards Dashboard
-          <ArrowRight className="h-4 w-4" />
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
       </Button>
     </div>
