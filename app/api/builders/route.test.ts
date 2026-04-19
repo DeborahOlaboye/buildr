@@ -12,7 +12,7 @@ describe('builders API route', () => {
 
   test('applies search query filter', async () => {
     const req = new NextRequest('http://localhost/api/builders?search=alice');
-    const res = await GET(req as any);
+    const res = await GET(req);
     const data = await res.json();
     expect(data.builders.every((b: any) =>
       b.name.toLowerCase().includes('alice') ||
