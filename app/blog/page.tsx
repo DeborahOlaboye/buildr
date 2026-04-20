@@ -130,6 +130,7 @@ export default function BlogPage() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary hover:underline"
+            aria-label="Buildr on Twitter (opens in new tab)"
           >
             Twitter
           </a>{" "}
