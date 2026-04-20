@@ -16,19 +16,28 @@ interface LeaderboardRowProps {
 function RankCell({ rank }: { rank: number }) {
   if (rank === 1)
     return (
-      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold">
+      <span
+        className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-yellow-400 text-yellow-900 dark:bg-yellow-500 dark:text-yellow-950 text-xs font-bold"
+        aria-label="Rank 1"
+      >
         1
       </span>
     );
   if (rank === 2)
     return (
-      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gray-300 text-gray-800 text-xs font-bold">
+      <span
+        className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gray-300 text-gray-800 dark:bg-gray-500 dark:text-gray-950 text-xs font-bold"
+        aria-label="Rank 2"
+      >
         2
       </span>
     );
   if (rank === 3)
     return (
-      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-orange-400 text-orange-900 text-xs font-bold">
+      <span
+        className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-orange-400 text-orange-900 dark:bg-orange-500 dark:text-orange-950 text-xs font-bold"
+        aria-label="Rank 3"
+      >
         3
       </span>
     );
