@@ -1,7 +1,15 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Database, GitBranch, Wallet, BarChart3 } from "lucide-react";
 import LegalPageHeader from "@/components/legal/LegalPageHeader";
 import LegalLinksBar from "@/components/legal/LegalLinksBar";
+
+export const metadata: Metadata = {
+  title: "Data Policy",
+  description:
+    "Learn how Buildr collects and uses onchain activity, GitHub contributions, and wallet data to calculate builder scores and rewards.",
+  robots: { index: true, follow: true },
+};
 
 const LAST_UPDATED = "February 1, 2025";
 

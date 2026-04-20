@@ -7,7 +7,7 @@ import type {
   EcosystemSearchResult,
 } from "@/types";
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest): Promise<NextResponse<SearchApiResponse>> {
   const { searchParams } = request.nextUrl;
   const query = searchParams.get("q")?.trim() ?? "";
 

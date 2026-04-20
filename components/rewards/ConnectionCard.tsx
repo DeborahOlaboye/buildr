@@ -66,11 +66,11 @@ export default function ConnectionCard({
           </div>
         </div>
 
-        {/* Status indicator */}
+        <span className="sr-only">{isConnected ? "Connected" : "Not connected"}</span>
         {isConnected ? (
-          <CheckCircle2 className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+          <CheckCircle2 className="h-5 w-5 text-green-500 shrink-0 mt-0.5" aria-hidden="true" />
         ) : (
-          <Circle className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
+          <Circle className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" aria-hidden="true" />
         )}
       </div>
 
@@ -90,8 +90,9 @@ export default function ConnectionCard({
             size="sm"
             className="w-full text-xs gap-1.5 text-muted-foreground"
             onClick={onDisconnect}
+            aria-label={`Disconnect ${title}`}
           >
-            <ExternalLink className="h-3 w-3" />
+            <ExternalLink className="h-3 w-3" aria-hidden="true" />
             Connected — Disconnect
           </Button>
         ) : (

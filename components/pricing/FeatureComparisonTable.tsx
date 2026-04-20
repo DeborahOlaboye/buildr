@@ -17,11 +17,26 @@ interface FeatureComparisonTableProps {
 
 function CellValue({ value }: { value: boolean | string }) {
   if (value === true)
-    return <Check className="h-4 w-4 text-green-500 mx-auto" />;
+    return (
+      <span className="flex justify-center">
+        <Check className="h-4 w-4 text-green-500" aria-hidden="true" />
+        <span className="sr-only">Included</span>
+      </span>
+    );
   if (value === false)
-    return <X className="h-4 w-4 text-muted-foreground/40 mx-auto" />;
+    return (
+      <span className="flex justify-center">
+        <X className="h-4 w-4 text-muted-foreground/40" aria-hidden="true" />
+        <span className="sr-only">Not included</span>
+      </span>
+    );
   if (value === "—")
-    return <Minus className="h-4 w-4 text-muted-foreground/40 mx-auto" />;
+    return (
+      <span className="flex justify-center">
+        <Minus className="h-4 w-4 text-muted-foreground/40" aria-hidden="true" />
+        <span className="sr-only">Not applicable</span>
+      </span>
+    );
   return (
     <span className="text-xs font-medium text-foreground text-center block">
       {value}

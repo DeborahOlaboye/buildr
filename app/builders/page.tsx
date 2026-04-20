@@ -9,7 +9,7 @@ import TopBuilderCard from "@/components/builders/TopBuilderCard";
 import EmptyState from "@/components/builders/EmptyState";
 import Pagination from "@/components/shared/Pagination";
 import SkeletonRow from "@/components/shared/SkeletonRow";
-import { Button } from "@/components/ui/button";
+import ErrorMessage from "@/components/shared/ErrorMessage";
 import { fetchBuilders } from "@/lib/api-client";
 import type { Builder, SortMode, RowsPerPageOption, BuildersApiResponse } from "@/types";
 
@@ -31,8 +31,8 @@ export default function BuildersPage() {
     try {
       const result = await fetchBuilders({ search, sort, page, limit: rowsPerPage });
       setData(result);
-    } catch {
-      setError("Failed to load builders. Please try again.");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Failed to load builders.");
     } finally {
       setIsLoading(false);
     }
@@ -63,7 +63,6 @@ export default function BuildersPage() {
 
   return (
     <div className="container py-8 space-y-6">
-      {/* Page Header */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Builders</h1>
         <p className="text-muted-foreground mt-1">
@@ -71,7 +70,6 @@ export default function BuildersPage() {
         </p>
       </div>
 
-      {/* Controls */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
         <div className="flex-1 w-full sm:max-w-sm">
           <SearchBar
@@ -85,7 +83,6 @@ export default function BuildersPage() {
         </div>
       </div>
 
-      {/* Top 3 Podium — only shown when not searching */}
       {!search.trim() && topThree.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {topThree.map((builder) => (
@@ -99,16 +96,9 @@ export default function BuildersPage() {
         </div>
       )}
 
-      {/* Count */}
       <BuilderCount count={total} filtered={!!search.trim()} />
 
-      {/* Table or Empty State */}
-      {error ? (
-        <div className="flex flex-col items-center gap-3 py-10 text-center" role="alert">
-          <p className="text-sm text-destructive font-medium">{error}</p>
-          <Button variant="outline" size="sm" onClick={load}>Try again</Button>
-        </div>
-      ) : isLoading ? (
+      {isLoading ? (
         <div className="rounded-xl border overflow-hidden">
           <table className="w-full">
             <tbody>
@@ -118,6 +108,8 @@ export default function BuildersPage() {
             </tbody>
           </table>
         </div>
+      ) : error ? (
+        <ErrorMessage message={error} onRetry={load} />
       ) : builders.length === 0 ? (
         <EmptyState query={search} onClear={() => handleSearchChange("")} />
       ) : (
@@ -136,7 +128,6 @@ export default function BuildersPage() {
         </>
       )}
 
-      {/* Keep modal state here so it survives re-renders */}
       {selectedBuilder && (
         <span className="hidden" data-selected={selectedBuilder.id} />
       )}
