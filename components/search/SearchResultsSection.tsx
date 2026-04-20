@@ -23,7 +23,7 @@ export default function SearchResultsSection({
           {count}
         </span>
       </div>
-      <div className="space-y-2">{children}</div>
+      <ul role="list" className="space-y-2">{children}</ul>
     </section>
   );
 }
