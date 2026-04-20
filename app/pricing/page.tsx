@@ -10,6 +10,7 @@ import EnterpriseCallout from "@/components/pricing/EnterpriseCallout";
 import TrustBar from "@/components/pricing/TrustBar";
 import ErrorMessage from "@/components/shared/ErrorMessage";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 import { fetchPricing } from "@/lib/api-client";
 import type { BillingCycle, PricingApiResponse } from "@/types";
 
