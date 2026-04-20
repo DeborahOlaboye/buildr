@@ -49,25 +49,25 @@ export default function MonthlyRewardSummary({
       </div>
 
       {/* Stats row */}
-      <div className="grid grid-cols-3 gap-3 text-center text-sm">
-        <div className="rounded-lg border bg-muted/40 p-2.5">
+      <ul role="list" className="grid grid-cols-3 gap-3 text-center text-sm">
+        <li role="listitem" className="rounded-lg border bg-muted/40 p-2.5">
           <p className="font-bold tabular-nums">{activity.wallet.count}</p>
           <p className="text-xs text-muted-foreground">Wallets</p>
-        </div>
-        <div className="rounded-lg border bg-muted/40 p-2.5">
+        </li>
+        <li role="listitem" className="rounded-lg border bg-muted/40 p-2.5">
           <p className="font-bold tabular-nums">{activity.contractsDeployed}</p>
           <p className="text-xs text-muted-foreground">Contracts</p>
-        </div>
-        <div className="rounded-lg border bg-muted/40 p-2.5">
+        </li>
+        <li role="listitem" className="rounded-lg border bg-muted/40 p-2.5">
           <p className="font-bold tabular-nums">
             {activity.github.contributions}
           </p>
           <p className="text-xs text-muted-foreground">Contributions</p>
-        </div>
-      </div>
+        </li>
+      </ul>
 
       <Button variant="outline" className="w-full gap-2 text-sm">
-        <TrendingUp className="h-4 w-4" />
+        <TrendingUp className="h-4 w-4" aria-hidden="true" />
         View full activity breakdown
       </Button>
     </div>
