@@ -7,6 +7,7 @@ import EcosystemSearchBar from "@/components/ecosystems/EcosystemSearchBar";
 import EcosystemCategoryTabs from "@/components/ecosystems/EcosystemCategoryTabs";
 import EcosystemGrid from "@/components/ecosystems/EcosystemGrid";
 import SkeletonCard from "@/components/shared/SkeletonCard";
+import { Button } from "@/components/ui/button";
 import { fetchEcosystems } from "@/lib/api-client";
 import type { EcosystemCategory, EcosystemsApiResponse } from "@/types";
 
@@ -15,12 +16,16 @@ export default function EcosystemsPage() {
   const [category, setCategory] = useState<EcosystemCategory>("All");
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<EcosystemsApiResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setIsLoading(true);
+    setError(null);
     try {
       const result = await fetchEcosystems({ search, category, limit: 50 });
       setData(result);
+    } catch {
+      setError("Failed to load ecosystems. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -92,7 +97,14 @@ export default function EcosystemsPage() {
       )}
 
       {/* Grid */}
-      {isLoading ? (
+      {error ? (
+        <div role="alert" className="rounded-lg border border-destructive/40 bg-destructive/5 p-6 text-center space-y-3">
+          <p className="text-sm text-destructive">{error}</p>
+          <Button variant="outline" size="sm" onClick={load}>
+            Try again
+          </Button>
+        </div>
+      ) : isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {Array.from({ length: 6 }).map((_, i) => (
             <SkeletonCard key={i} lines={3} showAvatar />
