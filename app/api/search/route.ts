@@ -1,15 +1,25 @@
 export const runtime = 'edge';
 import { NextRequest, NextResponse } from "next/server";
 import { MOCK_BUILDERS, MOCK_ECOSYSTEMS } from "@/lib/mock-data";
+import { apiError } from "@/lib/api-helpers";
 import type {
   SearchApiResponse,
   BuilderSearchResult,
   EcosystemSearchResult,
 } from "@/types";
 
-export async function GET(request: NextRequest): Promise<NextResponse<SearchApiResponse>> {
+const MAX_QUERY_LENGTH = 200;
+
+export async function GET(request: NextRequest): Promise<NextResponse<SearchApiResponse | { error: string; status: number }>> {
+  try {
   const { searchParams } = request.nextUrl;
-  const query = searchParams.get("q")?.trim() ?? "";
+  const rawQuery = searchParams.get("q")?.trim() ?? "";
+
+  if (rawQuery.length > MAX_QUERY_LENGTH) {
+    return apiError(`Query exceeds maximum length of ${MAX_QUERY_LENGTH} characters`, 400);
+  }
+
+  const query = rawQuery;
 
   if (!query) {
     const empty: SearchApiResponse = { query: "", builders: [], ecosystems: [], total: 0 };
@@ -60,5 +70,15 @@ export async function GET(request: NextRequest): Promise<NextResponse<SearchApiR
     total: builders.length + ecosystems.length,
   };
 
-  return NextResponse.json(body);
+  return NextResponse.json(body, {
+    headers: { "Cache-Control": "public, s-maxage=30, stale-while-revalidate=120" },
+  });
+  } catch (err) {
+    console.error("[GET /api/search]", err);
+    return apiError("Internal server error", 500);
+  }
 }
+
+export function POST(): NextResponse { return apiError("Method not allowed", 405) as NextResponse; }
+export function PUT(): NextResponse { return apiError("Method not allowed", 405) as NextResponse; }
+export function DELETE(): NextResponse { return apiError("Method not allowed", 405) as NextResponse; }
