@@ -21,3 +21,13 @@ export function parseIntParam(value: string | null, fallback: number): number {
 export function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
+
+/** Return a 404 JSON error response. */
+export function notFound(resource: string): NextResponse<ApiErrorBody> {
+  return apiError(`${resource} not found`, 404);
+}
+
+/** Return a 400 JSON error response. */
+export function badRequest(message: string): NextResponse<ApiErrorBody> {
+  return apiError(message, 400);
+}
