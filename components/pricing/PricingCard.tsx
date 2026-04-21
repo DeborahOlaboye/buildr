@@ -72,7 +72,7 @@ export default function PricingCard({ tier, billing }: PricingCardProps) {
       </CardHeader>
 
       <CardContent className="flex-1 pb-4">
-        <ul className="space-y-2.5">
+        <ul className="space-y-2.5" aria-label={`${tier.name} plan features`}>
           {tier.features.map((feature) => (
             <li key={feature} className="flex items-start gap-2.5 text-sm">
               <Check className="h-4 w-4 text-green-500 dark:text-green-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
