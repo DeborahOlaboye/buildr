@@ -53,7 +53,7 @@ export default function Footer() {
               href="https://github.com/buildr-app"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Buildr on GitHub"
+              aria-label="Buildr on GitHub (opens in new tab)"
               className="hover:text-primary transition-colors"
             >
               <Github className="h-4 w-4" aria-hidden="true" />
@@ -62,7 +62,7 @@ export default function Footer() {
               href="https://twitter.com/buildr_app"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Buildr on Twitter"
+              aria-label="Buildr on Twitter (opens in new tab)"
               className="hover:text-primary transition-colors"
             >
               <Twitter className="h-4 w-4" aria-hidden="true" />
