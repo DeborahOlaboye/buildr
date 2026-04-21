@@ -27,7 +27,7 @@ function RankBadge({ rank }: { rank: number }) {
     return (
       <span
         aria-label="Rank 1"
-        className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold"
+        className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-yellow-400 text-yellow-900 dark:bg-yellow-500 dark:text-yellow-950 text-xs font-bold"
       >
         1
       </span>
@@ -36,7 +36,7 @@ function RankBadge({ rank }: { rank: number }) {
     return (
       <span
         aria-label="Rank 2"
-        className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gray-300 text-gray-800 text-xs font-bold"
+        className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gray-300 text-gray-800 dark:bg-gray-500 dark:text-gray-950 text-xs font-bold"
       >
         2
       </span>
@@ -45,7 +45,7 @@ function RankBadge({ rank }: { rank: number }) {
     return (
       <span
         aria-label="Rank 3"
-        className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-orange-400 text-orange-900 text-xs font-bold"
+        className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-orange-400 text-orange-900 dark:bg-orange-500 dark:text-orange-950 text-xs font-bold"
       >
         3
       </span>

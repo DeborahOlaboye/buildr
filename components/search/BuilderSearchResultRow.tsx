@@ -14,6 +14,7 @@ interface Props {
 
 export default function BuilderSearchResultRow({ result, query }: Props) {
   return (
+    <li role="listitem">
     <Link
       href={`/builders/${result.handle}`}
       className="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors group"
@@ -34,7 +35,7 @@ export default function BuilderSearchResultRow({ result, query }: Props) {
             <HighlightMatch text={result.name} query={query} />
           </span>
           {result.isVerified && (
-            <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+            <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" aria-hidden="true" />
           )}
         </div>
         <div className="flex items-center gap-2 mt-0.5 flex-wrap">
@@ -56,5 +57,6 @@ export default function BuilderSearchResultRow({ result, query }: Props) {
         <p className="text-xs text-muted-foreground">Rank #{result.rank}</p>
       </div>
     </Link>
+    </li>
   );
 }

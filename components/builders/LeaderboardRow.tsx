@@ -16,19 +16,28 @@ interface LeaderboardRowProps {
 function RankCell({ rank }: { rank: number }) {
   if (rank === 1)
     return (
-      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold">
+      <span
+        className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-yellow-400 text-yellow-900 dark:bg-yellow-500 dark:text-yellow-950 text-xs font-bold"
+        aria-label="Rank 1"
+      >
         1
       </span>
     );
   if (rank === 2)
     return (
-      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gray-300 text-gray-800 text-xs font-bold">
+      <span
+        className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gray-300 text-gray-800 dark:bg-gray-500 dark:text-gray-950 text-xs font-bold"
+        aria-label="Rank 2"
+      >
         2
       </span>
     );
   if (rank === 3)
     return (
-      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-orange-400 text-orange-900 text-xs font-bold">
+      <span
+        className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-orange-400 text-orange-900 dark:bg-orange-500 dark:text-orange-950 text-xs font-bold"
+        aria-label="Rank 3"
+      >
         3
       </span>
     );
@@ -74,12 +83,6 @@ export default function LeaderboardRow({
         builder.rank <= 3 && "bg-muted/30"
       )}
       onClick={() => onClick(builder)}
-      role="button"
-      tabIndex={0}
-      aria-label={`View profile for ${builder.name}, rank #${builder.rank}`}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") onClick(builder);
-      }}
     >
       {/* Rank */}
       <td className="py-3 pl-4 pr-2 w-12">
@@ -103,7 +106,13 @@ export default function LeaderboardRow({
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="text-sm font-medium truncate">{builder.name}</span>
+              <button
+                className="text-sm font-medium truncate hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+                onClick={(e) => { e.stopPropagation(); onClick(builder); }}
+                aria-label={`View profile for ${builder.name}, rank #${builder.rank}`}
+              >
+                {builder.name}
+              </button>
               {builder.isVerified && (
                 <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" aria-hidden="true" />
               )}

@@ -13,6 +13,7 @@ interface Props {
 
 export default function EcosystemSearchResultRow({ result, query }: Props) {
   return (
+    <li role="listitem">
     <Link
       href={`/ecosystems/${result.slug}`}
       className="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors group"
@@ -33,10 +34,10 @@ export default function EcosystemSearchResultRow({ result, query }: Props) {
             <HighlightMatch text={result.name} query={query} />
           </span>
           {result.isVerified && (
-            <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+            <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" aria-hidden="true" />
           )}
           {result.isFeatured && (
-            <Star className="h-3.5 w-3.5 text-amber-500 fill-amber-500 flex-shrink-0" />
+            <Star className="h-3.5 w-3.5 text-amber-500 fill-amber-500 flex-shrink-0" aria-hidden="true" />
           )}
         </div>
         <div className="flex items-center gap-2 mt-0.5">
@@ -53,5 +54,6 @@ export default function EcosystemSearchResultRow({ result, query }: Props) {
         <p className="text-xs text-muted-foreground">builders</p>
       </div>
     </Link>
+    </li>
   );
 }

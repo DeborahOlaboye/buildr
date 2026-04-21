@@ -11,10 +11,10 @@ interface TopBuilderCardProps {
   onClick: (builder: Builder) => void;
 }
 
-const MEDAL: Record<number, { bg: string; label: string }> = {
-  1: { bg: "bg-yellow-400 text-yellow-900", label: "🥇 1st" },
-  2: { bg: "bg-gray-300 text-gray-800", label: "🥈 2nd" },
-  3: { bg: "bg-orange-400 text-orange-900", label: "🥉 3rd" },
+const MEDAL: Record<number, { bg: string; label: string; ariaLabel: string }> = {
+  1: { bg: "bg-yellow-400 text-yellow-900 dark:bg-yellow-500 dark:text-yellow-950", label: "🥇 1st", ariaLabel: "Gold medal, 1st place" },
+  2: { bg: "bg-gray-300 text-gray-800 dark:bg-gray-500 dark:text-gray-950", label: "🥈 2nd", ariaLabel: "Silver medal, 2nd place" },
+  3: { bg: "bg-orange-400 text-orange-900 dark:bg-orange-500 dark:text-orange-950", label: "🥉 3rd", ariaLabel: "Bronze medal, 3rd place" },
 };
 
 export default function TopBuilderCard({
@@ -40,8 +40,9 @@ export default function TopBuilderCard({
           "inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold",
           medal.bg
         )}
+        aria-label={medal.ariaLabel}
       >
-        {medal.label}
+        <span aria-hidden="true">{medal.label}</span>
       </span>
       <div className="relative h-14 w-14 rounded-full overflow-hidden bg-muted ring-2 ring-offset-2 ring-primary/20">
         <Image

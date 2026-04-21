@@ -75,7 +75,7 @@ export default function BlogPage() {
           href="/"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           Back to home
         </Link>
         <h1 className="text-3xl font-bold tracking-tight">Blog</h1>
@@ -99,11 +99,11 @@ export default function BlogPage() {
                 {post.category}
               </span>
               <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Calendar className="h-3 w-3" />
-                {post.date}
+                <Calendar className="h-3 w-3" aria-hidden="true" />
+                <time dateTime={post.date}>{post.date}</time>
               </span>
               <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Clock className="h-3 w-3" />
+                <Clock className="h-3 w-3" aria-hidden="true" />
                 {post.readTime}
               </span>
             </div>
@@ -114,8 +114,8 @@ export default function BlogPage() {
               className="text-sm text-muted-foreground line-clamp-2"
               dangerouslySetInnerHTML={{ __html: post.excerpt }}
             />
-            <div className="flex items-center gap-1 text-sm font-medium text-primary">
-              Read more <ArrowRight className="h-4 w-4" />
+            <div className="flex items-center gap-1 text-sm font-medium text-primary" aria-hidden="true">
+              Read more <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </div>
           </article>
         ))}
@@ -130,6 +130,7 @@ export default function BlogPage() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary hover:underline"
+            aria-label="Buildr on Twitter (opens in new tab)"
           >
             Twitter
           </a>{" "}

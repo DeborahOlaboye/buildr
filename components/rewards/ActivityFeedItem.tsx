@@ -47,10 +47,15 @@ export default function ActivityFeedItemComponent({ item }: ActivityFeedItemProp
   return (
     <div className="flex items-start gap-3 py-3">
       {/* Avatar */}
-      <Link href={`/builders/${item.builderHandle}`} className="shrink-0">
+      <Link
+        href={`/builders/${item.builderHandle}`}
+        className="shrink-0"
+        aria-label={`View ${item.builderName}'s profile`}
+        tabIndex={-1}
+      >
         <Avatar className="h-8 w-8">
-          <AvatarImage src={item.avatarUrl} alt={item.builderName} />
-          <AvatarFallback className="text-xs">{initials}</AvatarFallback>
+          <AvatarImage src={item.avatarUrl} alt="" />
+          <AvatarFallback className="text-xs" aria-hidden="true">{initials}</AvatarFallback>
         </Avatar>
       </Link>
 

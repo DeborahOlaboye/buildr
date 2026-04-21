@@ -27,10 +27,12 @@ export default function EcosystemGrid({
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <ul role="list" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {ecosystems.map((ecosystem) => (
-        <EcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
+        <li key={ecosystem.id} role="listitem">
+          <EcosystemCard ecosystem={ecosystem} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

@@ -71,18 +71,19 @@ export default function BuilderProfileHero({ builder }: BuilderProfileHeroProps)
 
         {/* Ecosystems */}
         {builder.ecosystem.length > 0 && (
-          <div className="flex flex-wrap gap-2">
+          <ul role="list" aria-label="Ecosystems" className="flex flex-wrap gap-2">
             {builder.ecosystem.map((eco) => (
-              <span
+              <li
                 key={eco}
+                role="listitem"
                 className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium ${
                   ECOSYSTEM_COLORS[eco] ?? "bg-muted text-muted-foreground border-border"
                 }`}
               >
                 {eco}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
         )}
 
         {/* Links */}
