@@ -1,7 +1,7 @@
 export const runtime = 'edge';
 import { NextRequest, NextResponse } from "next/server";
 import { MOCK_ECOSYSTEMS, MOCK_BUILDERS } from "@/lib/mock-data";
-import { apiError } from "@/lib/api-helpers";
+import { apiError, badRequest, notFound } from "@/lib/api-helpers";
 import type { EcosystemDetailApiResponse } from "@/types";
 
 interface RouteContext {
@@ -13,12 +13,12 @@ export async function GET(_request: NextRequest, { params }: RouteContext): Prom
     const { slug } = await params;
 
     if (!slug || typeof slug !== "string") {
-      return apiError("Missing ecosystem slug", 400);
+      return badRequest("Missing ecosystem slug");
     }
 
     const sanitised = slug.trim().toLowerCase();
     if (sanitised.length === 0) {
-      return apiError("Invalid ecosystem slug", 400);
+      return badRequest("Invalid ecosystem slug");
     }
 
     const ecosystem = MOCK_ECOSYSTEMS.find(
@@ -26,7 +26,7 @@ export async function GET(_request: NextRequest, { params }: RouteContext): Prom
     );
 
     if (!ecosystem) {
-      return apiError(`Ecosystem '${sanitised}' not found`, 404);
+      return notFound(`Ecosystem '${sanitised}'`);
     }
 
     const builders = MOCK_BUILDERS.filter((b) =>

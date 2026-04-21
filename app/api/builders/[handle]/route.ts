@@ -1,7 +1,7 @@
 export const runtime = 'edge';
 import { NextRequest, NextResponse } from "next/server";
 import { MOCK_BUILDERS } from "@/lib/mock-data";
-import { apiError } from "@/lib/api-helpers";
+import { apiError, badRequest, notFound } from "@/lib/api-helpers";
 import type { BuilderApiResponse } from "@/types";
 
 interface RouteContext {
@@ -13,12 +13,12 @@ export async function GET(_request: NextRequest, { params }: RouteContext): Prom
     const { handle } = await params;
 
     if (!handle || typeof handle !== "string") {
-      return apiError("Missing builder handle", 400);
+      return badRequest("Missing builder handle");
     }
 
     const sanitised = handle.trim().toLowerCase();
     if (sanitised.length === 0) {
-      return apiError("Invalid builder handle", 400);
+      return badRequest("Invalid builder handle");
     }
 
     const builder = MOCK_BUILDERS.find(
@@ -26,7 +26,7 @@ export async function GET(_request: NextRequest, { params }: RouteContext): Prom
     );
 
     if (!builder) {
-      return apiError(`Builder '${sanitised}' not found`, 404);
+      return notFound(`Builder '${sanitised}'`);
     }
 
     const body: BuilderApiResponse = { builder };
