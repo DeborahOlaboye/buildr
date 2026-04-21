@@ -134,7 +134,7 @@ export default function Navbar() {
                 onClick={() => { setSearchOpen(false); setSearchValue(""); }}
                 aria-label="Close search"
               >
-                <X className="h-4 w-4" />
+                <X className="h-4 w-4" aria-hidden="true" />
               </Button>
             </form>
           ) : (
@@ -145,14 +145,14 @@ export default function Navbar() {
               aria-label="Open search (⌘K)"
               title="Search (⌘K)"
             >
-              <Search className="h-4 w-4" />
+              <Search className="h-4 w-4" aria-hidden="true" />
             </Button>
           )}
           <ThemeToggle />
           {IS_PRO ? (
             <div className="flex items-center gap-1.5">
               <Badge className="gap-1 text-xs px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 hover:bg-primary/15">
-                <Star className="h-3 w-3 fill-primary" />
+                <Star className="h-3 w-3 fill-primary" aria-hidden="true" />
                 Stacks+ Member
               </Badge>
             </div>
@@ -163,7 +163,7 @@ export default function Navbar() {
               </Button>
               <Button size="sm" className="gap-1.5" asChild>
                 <Link href="/pricing">
-                  <Zap className="h-3.5 w-3.5" />
+                  <Zap className="h-3.5 w-3.5" aria-hidden="true" />
                   Join Stacks+
                 </Link>
               </Button>
@@ -181,7 +181,7 @@ export default function Navbar() {
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
         >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
         </Button>
       </div>
 
