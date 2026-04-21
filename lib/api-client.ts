@@ -13,6 +13,7 @@ import type {
   RewardsApiResponse,
   ActivityApiResponse,
   PricingApiResponse,
+  SearchApiResponse,
   SortMode,
   EcosystemCategory,
   RowsPerPageOption,
@@ -23,12 +24,15 @@ function getBaseUrl(): string {
   return publicConfig.baseUrl;
 }
 
-async function apiFetch<T>(path: string): Promise<T> {
+async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const url = `${getBaseUrl()}${path}`;
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, { cache: "no-store", ...init });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error((body as { error?: string }).error ?? `API error ${res.status}`);
+    const message = (body as { error?: string }).error ?? `API error ${res.status}`;
+    const err = new Error(message) as Error & { status: number };
+    err.status = res.status;
+    throw err;
   }
   return (await res.json()) as T;
 }
@@ -96,4 +100,10 @@ export function fetchActivity(limit?: number): Promise<ActivityApiResponse> {
 
 export function fetchPricing(): Promise<PricingApiResponse> {
   return apiFetch<PricingApiResponse>("/api/pricing");
+}
+
+// ─── Search ──────────────────────────────────────────────────────────────────
+
+export function fetchSearch(query: string): Promise<SearchApiResponse> {
+  return apiFetch<SearchApiResponse>(`/api/search?q=${encodeURIComponent(query)}`);
 }
