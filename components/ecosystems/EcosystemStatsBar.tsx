@@ -32,10 +32,11 @@ const STAT_ITEMS = (stats: EcosystemStats) => [
 
 export default function EcosystemStatsBar({ stats }: EcosystemStatsBarProps) {
   return (
-    <div className="grid grid-cols-3 divide-x rounded-xl border bg-card overflow-hidden">
+    <ul role="list" className="grid grid-cols-3 divide-x rounded-xl border bg-card overflow-hidden">
       {STAT_ITEMS(stats).map((item) => (
-        <div
+        <li
           key={item.label}
+          role="listitem"
           className="flex flex-col items-center justify-center py-4 px-3 text-center gap-1"
           aria-label={`${item.label}: ${item.value}`}
         >
@@ -44,9 +45,9 @@ export default function EcosystemStatsBar({ stats }: EcosystemStatsBarProps) {
             <span>{item.label}</span>
           </div>
           <span className="text-xl font-bold tabular-nums" aria-hidden="true">{item.value}</span>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
