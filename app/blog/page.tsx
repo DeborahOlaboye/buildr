@@ -75,7 +75,7 @@ export default function BlogPage() {
           href="/"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           Back to home
         </Link>
         <h1 className="text-3xl font-bold tracking-tight">Blog</h1>
