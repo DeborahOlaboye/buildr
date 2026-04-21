@@ -20,11 +20,13 @@ export default function FeaturedSection({ ecosystems }: FeaturedSectionProps) {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <ul role="list" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {ecosystems.map((ecosystem) => (
-          <FeaturedEcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
+          <li key={ecosystem.id} role="listitem">
+            <FeaturedEcosystemCard ecosystem={ecosystem} />
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
