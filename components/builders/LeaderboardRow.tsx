@@ -83,12 +83,6 @@ export default function LeaderboardRow({
         builder.rank <= 3 && "bg-muted/30"
       )}
       onClick={() => onClick(builder)}
-      role="button"
-      tabIndex={0}
-      aria-label={`View profile for ${builder.name}, rank #${builder.rank}`}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") onClick(builder);
-      }}
     >
       {/* Rank */}
       <td className="py-3 pl-4 pr-2 w-12">
@@ -112,7 +106,13 @@ export default function LeaderboardRow({
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="text-sm font-medium truncate">{builder.name}</span>
+              <button
+                className="text-sm font-medium truncate hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+                onClick={(e) => { e.stopPropagation(); onClick(builder); }}
+                aria-label={`View profile for ${builder.name}, rank #${builder.rank}`}
+              >
+                {builder.name}
+              </button>
               {builder.isVerified && (
                 <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" aria-hidden="true" />
               )}
